@@ -1,0 +1,67 @@
+/* ----------------- Navbar ---------------- */
+#navTop {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #990E17;
+    width: 100vw;
+    height: 48px;
+    border-bottom: 1px solid #77050E;
+}
+
+#rightIconsGroup { display: flex; }
+#rightIconsGroup > a > div { border-radius: 50px; }
+
+/* Navbar elements */
+.navBtns { display: flex; width: 40px; height: 40px; justify-content: center; align-items: center; }
+.navBtns:hover  { background-color: #BB1E27; } 
+.navBtns:active { background-color: #CC2E37; box-shadow: 0 0 0 1px white inset; }
+/* ----------------- Navbar ---------------- */
+
+/* ----------------- Sidebar ---------------- */
+.sideBar {
+    width: 250px;
+    position: sticky;
+    left: 0px;
+    top: 49px;
+    height: calc(100vh - 69px);
+    background-color: #f3f2f1;
+    border-right: 1px solid #eee;
+    transition: 0.4s ease-in;
+    overflow: hidden;
+    padding: 10px;
+}
+
+/* Sidebar elements */
+.sideBar > ul { display: flex; flex-wrap: wrap; flex-direction: column; padding: 0px; padding-top: 50px; }
+.sideBar > ul > li > div { display: flex; align-items: center; transition: 0.1s ease-in; }
+.sideBar > ul > li > div:hover { background-color: #e3e2e1; }
+.sideBar > ul > li > div:active { background-color: #d3d2d1; }
+.sideBar > ul > li > div > div { display: flex; justify-content: center; align-items: center; width: 80px; height: 80px;}
+.sideBar > ul > li > div > span { white-space: nowrap; }
+.hide { width: 80px; }
+
+/* Sidebar on/off animation */
+.fade-enter { opacity: 0; }
+.fade-enter-active { opacity: 1; transition: opacity 400ms; }
+.fade-exit { opacity: 1; }  
+.fade-exit-active { opacity: 0; transition: opacity 400ms; }
+
+/* minimum width to show Sidebar */
+@media (width <= 600px) {
+    .sideBar {
+        display: none;
+    }
+}
+/* ----------------- Sidebar ---------------- */
+
+/* ----------------- Wrap ---------------- */
+#container { display: flex; }
+
+#wrap { width: calc(100vw - 80px); transition: 0.4s ease-in; }
+#wrap .sideshown { width: calc(100vw - 250px); }
+
+/* ----------------- Wrap ---------------- */

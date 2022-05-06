@@ -1,0 +1,49 @@
+#fileManager {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height:100%;
+}
+
+/* ----------------- Controller ---------------- */
+#controller {
+    position: sticky;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 301px);
+    height: 48px;
+    border-bottom: 1px solid #c1c2c3;
+}
+
+#controller > ul { display: flex; justify-content: space-between; align-items: center; width: 40%; min-width: 400px; padding-left: 1%;}
+.controllerItem { display: flex; align-items: center; border-radius: 10px; padding: 5px; width: 100%} 
+.controllerItem:hover { background-color: #f1f2f3; }
+.controllerItem:active { background-color: #e1e2e3; }
+.controllerItem > span{ margin-left: 5px; }
+#controller > #sort { margin-right: 1%; }
+
+@media (max-width: 600px) {
+    .controllerItem { display: none; }
+}
+
+@media (max-width: 1000px) {
+    #controller { width: calc(100% - 1px); }
+}
+/* ----------------- Controller ---------------- */
+/* ----------------- File Info ---------------- */
+#fileInfo {
+    position: sticky;
+    display: block;
+    top: 0px; right: 0px;
+    width: 300px;
+    height: 100%;
+    background-color: #f1f2f3;
+    border-left: 1px solid #c1c2c3;
+}
+
+@media (max-width: 1000px) {
+    #fileInfo { display: none; }
+}
+/* ----------------- File Info ---------------- */
