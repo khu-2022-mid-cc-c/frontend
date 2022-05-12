@@ -1,19 +1,18 @@
-import "./videoViewer.css";
+import "./embedViewer.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ReactPlayer from 'react-player/lazy';
 
-import resolvePath from "../lib/resourcePathResolve";
-import ResourceNotFound from "../lib/resourceNotFound";
+import resolvePath from "./lib/resourcePathResolve2";
+import ResourceNotFound from "./lib/resourceNotFound";
 
 import { IconContext } from "react-icons";
 import { RiShareBoxLine } from "react-icons/ri";
 import { MdOutlineFileDownload } from "react-icons/md";
 
-function VideoViewer() {    
+function VideoViewer() {
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
-    const [imageData, setImageData] = useState("");
+    const [videoData, setVideoData] = useState("");
     useEffect(() => {
         fetch(resolvedSrc)
             .then((res) => {
@@ -22,10 +21,11 @@ function VideoViewer() {
             })
             .then((img) => {
                 const localUrl = URL.createObjectURL(img);
-                setImageData(localUrl);
+                setVideoData(localUrl);
             })
             .catch((e) => {
-                setImageData(false);
+                console.log(e);
+                setVideoData(false);
             });
     }, []);
 
@@ -35,11 +35,11 @@ function VideoViewer() {
         { title: "download", icon: MdOutlineFileDownload, href: "/about" },
     ];
 
-    if (imageData === false) return <ResourceNotFound />;
+    if (videoData === false) return <ResourceNotFound />;
     else {
         return (
             <div
-                className="photoViewer"
+                className="embedViewer"
                 onMouseEnter={() => {
                     setShowHeader(true);
                 }}
@@ -48,16 +48,16 @@ function VideoViewer() {
                 }}
             >
                 <div
-                    className={`photoHeader ${
-                        showHeader ? "photoHeader-show" : "photoHeader-hide"
+                    className={`embedHeader ${
+                        showHeader ? "embedHeader-show" : "embedHeader-hide"
                     }`}
                 >
-                    <span className="fileName">ㅁㄴㅇㄹ.jpg</span>
-                    <div className="photoViewerIconSet">
+                    <span className="fileName">ㅁㄴㅇㄹ.mp4</span>
+                    <div className="embedViewerIconSet">
                         {icons.map((v) => {
                             return (
-                                <a href={v.href} title={v.title}>
-                                    <div className="photoViewerIcons">
+                                <a href={v.href} title={v.title} key={v.title}>
+                                    <div className="embedViewerIcons">
                                         <IconContext.Provider
                                             value={{
                                                 size: "30px",
@@ -70,7 +70,7 @@ function VideoViewer() {
                                 </a>
                             );
                         })}
-                        <div className="photoViewerLogo">
+                        <div className="embedViewerLogo">
                             <img
                                 src={`${process.env.PUBLIC_URL}/logo.png`}
                                 alt="logo"
@@ -78,7 +78,9 @@ function VideoViewer() {
                         </div>
                     </div>
                 </div>
-                <img className="photo" src={imageData} alt=""></img>
+                <video controls width="100%" height="100%">
+                    <source src={resolvedSrc} />
+                </video>
             </div>
         );
     }

@@ -1,18 +1,18 @@
-import "./photoViewer.css";
+import "./pdfViewer.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import resolvePath from "../lib/resourcePathResolve";
-import ResourceNotFound from "../lib/resourceNotFound";
+import resolvePath from "./lib/resourcePathResolve3";
+import ResourceNotFound from "./lib/resourceNotFound";
 
 import { IconContext } from "react-icons";
 import { RiShareBoxLine } from "react-icons/ri";
 import { MdOutlineFileDownload } from "react-icons/md";
 
-function PhotoViewer() {
+function PDFViewer() {
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
-    const [imageData, setImageData] = useState("");
+    const [pdfData, setPDFData] = useState("");
     useEffect(() => {
         fetch(resolvedSrc)
             .then((res) => {
@@ -21,42 +21,30 @@ function PhotoViewer() {
             })
             .then((img) => {
                 const localUrl = URL.createObjectURL(img);
-                setImageData(localUrl);
+                setPDFData(localUrl);
             })
             .catch((e) => {
-                setImageData(false);
+                console.log(e);
+                setPDFData(false);
             });
     }, []);
 
-    const [showHeader, setShowHeader] = useState(false);
     const icons = [
         { title: "share", icon: RiShareBoxLine, href: "/about" },
         { title: "download", icon: MdOutlineFileDownload, href: "/about" },
     ];
 
-    if (imageData === false) return <ResourceNotFound />;
+    if (pdfData === false) return <ResourceNotFound />;
     else {
         return (
-            <div
-                className="photoViewer"
-                onMouseEnter={() => {
-                    setShowHeader(true);
-                }}
-                onMouseLeave={() => {
-                    setShowHeader(false);
-                }}
-            >
-                <div
-                    className={`photoHeader ${
-                        showHeader ? "photoHeader-show" : "photoHeader-hide"
-                    }`}
-                >
-                    <span className="fileName">ㅁㄴㅇㄹ.jpg</span>
-                    <div className="photoViewerIconSet">
+            <div className="pdfViewer">
+                <div className="pdfHeader">
+                    <span className="fileName">ㅁㄴㅇㄹ.pdf</span>
+                    <div className="pdfViewerIconSet">
                         {icons.map((v) => {
                             return (
-                                <a href={v.href} title={v.title}>
-                                    <div className="photoViewerIcons">
+                                <a href={v.href} title={v.title} key={v.title}>
+                                    <div className="pdfViewerIcons">
                                         <IconContext.Provider
                                             value={{
                                                 size: "30px",
@@ -69,7 +57,7 @@ function PhotoViewer() {
                                 </a>
                             );
                         })}
-                        <div className="photoViewerLogo">
+                        <div className="pdfViewerLogo">
                             <img
                                 src={`${process.env.PUBLIC_URL}/logo.png`}
                                 alt="logo"
@@ -77,10 +65,15 @@ function PhotoViewer() {
                         </div>
                     </div>
                 </div>
-                <img className="photo" src={imageData} alt=""></img>
+                <embed
+                    src={resolvedSrc}
+                    className="pdf"
+                    width="100%"
+                    type="application/pdf"
+                />
             </div>
         );
     }
 }
 
-export default PhotoViewer;
+export default PDFViewer;
