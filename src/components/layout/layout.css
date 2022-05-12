@@ -13,7 +13,7 @@
 }
 
 .leftIconsGroup { display: flex; align-items: center;}
-.leftIconsGroup > a > img { height: 25px; margin-left: 20px; image-rendering:auto; }
+.leftIconsGroup > a > img { height: 25px; margin-left: 20px; margin-top: 4px; image-rendering:auto; }
 
 #rightIconsGroup { display: flex; }
 

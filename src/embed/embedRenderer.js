@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
 import PhotoViewer from "./photo/photoViewer";
+import VideoViewer from "./video/videoViewer";
 
 function Index() {
     return (
@@ -24,8 +25,8 @@ function FileManager() {
         <Routes>
             <Route path="/" element={<Index />}></Route>
             <Route path="/photo/:src" element={<PhotoViewer />}></Route>
-            {/* <Route path={`/video/{:src}`} element={<VideoViewer />}></Route>
-            <Route path={`/pdf/{:src}`} element={<PDFViewer />}></Route> */}
+            <Route path={`/video/{:src}`} element={<VideoViewer />}></Route>
+            {/* <Route path={`/pdf/{:src}`} element={<PDFViewer />}></Route> */}
         </Routes>
     );
 }

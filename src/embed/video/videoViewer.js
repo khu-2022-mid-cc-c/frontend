@@ -1,6 +1,7 @@
-import "./photoViewer.css";
+import "./videoViewer.css";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ReactPlayer from 'react-player/lazy';
 
 import resolvePath from "../lib/resourcePathResolve";
 import ResourceNotFound from "../lib/resourceNotFound";
@@ -9,7 +10,7 @@ import { IconContext } from "react-icons";
 import { RiShareBoxLine } from "react-icons/ri";
 import { MdOutlineFileDownload } from "react-icons/md";
 
-function PhotoViewer() {
+function VideoViewer() {    
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
     const [imageData, setImageData] = useState("");
@@ -83,4 +84,4 @@ function PhotoViewer() {
     }
 }
 
-export default PhotoViewer;
+export default VideoViewer;
