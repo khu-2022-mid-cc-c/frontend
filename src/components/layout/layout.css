@@ -12,11 +12,13 @@
     border-bottom: 1px solid #77050E;
 }
 
+.leftIconsGroup { display: flex; align-items: center;}
+.leftIconsGroup > a > img { height: 25px; margin-left: 20px; margin-top: 4px; image-rendering:auto; }
+
 #rightIconsGroup { display: flex; }
-#rightIconsGroup > a > div { border-radius: 50px; }
 
 /* Navbar elements */
-.navBtns { display: flex; width: 40px; height: 40px; justify-content: center; align-items: center; }
+.navBtns { display: flex; width: 48px; height: 48px; justify-content: center; align-items: center; }
 .navBtns:hover  { background-color: #BB1E27; } 
 .navBtns:active { background-color: #CC2E37; box-shadow: 0 0 0 1px white inset; }
 /* ----------------- Navbar ---------------- */
