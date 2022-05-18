@@ -2,13 +2,16 @@ import "./fileManager.css";
 import Controller from "./components/controller";
 import FileInfo from "./components/fileInfo";
 import Files from "./components/files";
+import { useState } from "react";
 
 function FileManager() {
+    const [value, setValue] = useState("");
+
     return (
         <div id="fileManager">
             <Controller />
-            <FileInfo />
-            <Files />
+            <FileInfo info = {value}/>
+            <Files setValue={setValue}/>
         </div>
     );
 }
