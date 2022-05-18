@@ -1,11 +1,7 @@
-import React from "react";
-
-function fileInfo(props) {
-    return (
-        <div id="fileInfo">
-            <p>{props.info}</p>
-        </div>
-    );
+function fileInfo() {
+    return <div id="fileInfo">
+    파일 정보
+    </div>;
 }
 
 export default fileInfo;

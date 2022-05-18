@@ -1,6 +1,5 @@
 import { IconContext } from "react-icons";
 import { AiOutlineFile } from "react-icons/ai";
-import React from "react";
 
 function FileIcons(props) {
     return (
@@ -22,23 +21,16 @@ function Files(props){
         { key: "fileinfo_5", title: "5", icon: AiOutlineFile },
 
     ];
-
-    function sendData(title){
-        props.setValue(title);
-    }
-     
     return (
         <div id="files">
             <ul>
                 {fileInfo.map((v) => (
-                    <div onClick={() => sendData(v.title)}>
-                        <li key={v.key}>
-                            <FileIcons 
-                            title={v.title}
-                            icon={v.icon}
-                            />
-                        </li>
-                    </div>
+                    <li key={v.key}>
+                        <FileIcons 
+                        title={v.title}
+                        icon={v.icon}
+                        />
+                    </li>
                 ))}
             </ul>
         </div>
