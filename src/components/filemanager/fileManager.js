@@ -8,10 +8,10 @@ function FileManager() {
     const [value, setValue] = useState("");
 
     return (
-        <div id="fileManager">
+        <div className="fileManager">
             <Controller />
-            <FileInfo info = {value}/>
-            <Files setValue={setValue}/>
+            <FileInfo info={value} />
+            <Files setValue={setValue} />
         </div>
     );
 }
