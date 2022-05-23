@@ -145,6 +145,11 @@
     padding: 5px;
     margin: 5px;
 }
+
+.FileIcon.selected {
+    background-color: #f1f2f3;
+}
+
 .FileIcon .FileTitle {
     margin-top: 4px;
     text-align: center;

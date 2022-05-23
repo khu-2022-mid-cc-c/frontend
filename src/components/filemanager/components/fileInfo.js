@@ -3,7 +3,7 @@ import React from "react";
 function fileInfo(props) {
     return (
         <div id="fileInfo">
-            <p>{props.info}</p>
+            <p>{props.selectedFiles}</p>
         </div>
     );
 }
