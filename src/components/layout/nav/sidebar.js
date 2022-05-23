@@ -8,7 +8,7 @@ import { IconContext } from "react-icons";
 
 function SideBarItems(props) {
     return (
-        <li key={props.item.title}>
+        <li>
             <div>
                 <div>
                     <IconContext.Provider
@@ -53,7 +53,7 @@ function SideBar(props) {
         <div className={className}>
             <ul>
                 {menuItems.map((v) => (
-                    <SideBarItems item={v} show={props.show} />
+                    <SideBarItems item={v} show={props.show} key={v.key} />
                 ))}
             </ul>
         </div>

@@ -40,6 +40,7 @@ function Sorts(props) {
                             onClick={() => {
                                 props.onset(v, props.asc);
                             }}
+                            key={v}
                         >
                             {v}
                         </div>
@@ -63,9 +64,8 @@ function Sorts(props) {
 }
 
 function Controller(props) {
-    // let { fileSelected } = props;
-    // let displayMode = fileSelected.length < 2 ? fileSelected.length : 2;
-    // let sort?
+    let { selectedFiles } = props;
+    let displayMode = selectedFiles.length < 2 ? selectedFiles.length : 2;
 
     let command = () => {};
     const controlBtns = [
@@ -106,17 +106,22 @@ function Controller(props) {
     return (
         <div className="controller">
             <ul>
-                {controlBtns[0].map((v) => (
+                {controlBtns[displayMode].map((v) => (
                     <li key={v.key} onClick={command(v.title)}>
                         <ControllerItems title={v.title} icon={v.icon} />
                     </li>
                 ))}
             </ul>
             <div className="leftControllerGroup">
-                {true && (
-                    <div className="cancel">
+                {displayMode > 0 && (
+                    <div
+                        className="cancel"
+                        onClick={() => {
+                            props.cancel();
+                        }}
+                    >
                         <ControllerItems
-                            title={`${1}개 선택됨`}
+                            title={`${displayMode}개 선택됨`}
                             icon={MdClose}
                         />
                     </div>
