@@ -28,15 +28,17 @@ function FileManager() {
     };
 
     return (
-        <div className="fileManager">
-            <Controller selectedFiles={selectedFiles} cancel={cancel} />
-            <FileInfo selectedFiles={selectedFiles} />
-            <Files
-                fileList={fileList}
-                selectedFiles={selectedFiles}
-                selectFile={selectFile}
-            />
-        </div>
+        <Layout>
+            <div className="fileManager">
+                <Controller selectedFiles={selectedFiles} cancel={cancel} />
+                <FileInfo selectedFiles={selectedFiles} />
+                <Files
+                    fileList={fileList}
+                    selectedFiles={selectedFiles}
+                    selectFile={selectFile}
+                />
+            </div>
+        </Layout>
     );
 }
 

@@ -19,6 +19,17 @@
     border-radius: 50px;
 }
 
+.navLeftIconsGroup {
+    display: flex;
+    align-items: center;
+}
+.navLeftIconsGroup > a > img {
+    height: 25px;
+    margin-left: 20px;
+    margin-top: 4px;
+    image-rendering: auto;
+}
+
 /* Navbar elements */
 .navBtns {
     display: flex;
