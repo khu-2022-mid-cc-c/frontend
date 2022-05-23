@@ -30,7 +30,7 @@ function RightGroup() {
     ];
 
     return (
-        <div id="rightIconsGroup">
+        <div className="navRightIconsGroup">
             {icons.map((v) => {
                 return (
                     <a href={v.href} title={v.title}>
@@ -60,6 +60,8 @@ function Navbar(props) {
                     ></img>
                 </a>
             </div>
+        <div className="navTop">
+            <Menubtn onClick={props.toggleSidebar} />
             <RightGroup />
         </div>
     );
