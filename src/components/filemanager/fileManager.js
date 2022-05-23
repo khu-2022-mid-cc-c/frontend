@@ -1,4 +1,5 @@
 import "./fileManager.css";
+import Layout from "../layout/layout";
 import Controller from "./components/controller";
 import FileInfo from "./components/fileInfo";
 import Files from "./components/files";

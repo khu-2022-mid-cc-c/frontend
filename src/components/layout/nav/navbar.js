@@ -50,6 +50,16 @@ function RightGroup() {
 
 function Navbar(props) {
     return (
+        <div id="navTop">
+            <div className="leftIconsGroup">
+                <Menubtn onClick={props.toggleSidebar} />
+                <a href="/">
+                    <img
+                        src={`${process.env.PUBLIC_URL}/logo.png`}
+                        alt="logo"
+                    ></img>
+                </a>
+            </div>
         <div className="navTop">
             <Menubtn onClick={props.toggleSidebar} />
             <RightGroup />
