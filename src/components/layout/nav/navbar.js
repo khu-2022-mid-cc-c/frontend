@@ -33,7 +33,7 @@ function RightGroup() {
         <div className="navRightIconsGroup">
             {icons.map((v) => {
                 return (
-                    <a href={v.href} title={v.title}>
+                    <a href={v.href} title={v.title} key={v.title}>
                         <div className={"navBtns"}>
                             <IconContext.Provider
                                 value={{ size: "24px", color: "white" }}
