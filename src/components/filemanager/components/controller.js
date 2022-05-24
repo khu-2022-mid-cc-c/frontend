@@ -116,7 +116,7 @@ function Controller(props) {
                 {true && (
                     <div className="cancel">
                         <ControllerItems
-                            title={`${1}개 선택됨`}
+                            title={`${props.info.length}개 선택됨`}
                             icon={MdClose}
                         />
                     </div>

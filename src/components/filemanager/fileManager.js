@@ -9,7 +9,7 @@ function FileManager() {
 
     return (
         <div className="fileManager">
-            <Controller />
+            <Controller info={value}/>
             <FileInfo info={value} />
             <Files setValue={setValue} />
         </div>

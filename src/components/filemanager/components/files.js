@@ -31,13 +31,10 @@ function Files(props) {
             return;
         }
         setClick([...clicks, selectedClick]);
+
     };
-
+    props.setValue(clicks);
     console.log(clicks);
-
-    function sendData(title) {
-        props.setValue(title);
-    }
 
     return (
         <div className="files">
@@ -50,7 +47,6 @@ function Files(props) {
                                 : "FileIcon"
                         }
                         onClick={() => {
-                            sendData(v.title);
                             onClickHandler(v.title);
                             }
                         }
