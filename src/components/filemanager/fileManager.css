@@ -145,6 +145,9 @@
     padding: 5px;
     margin: 5px;
 }
+.FileIcon.active {
+    background-color: #e1e2e3;
+}
 .FileIcon .FileTitle {
     margin-top: 4px;
     text-align: center;
@@ -155,9 +158,6 @@
 }
 .FileIcon:hover {
     background-color: #f1f2f3;
-}
-.FileIcon:active {
-    background-color: #e1e2e3;
 }
 
 @media (max-width: 600px) {

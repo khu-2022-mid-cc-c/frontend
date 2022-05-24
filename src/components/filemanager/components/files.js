@@ -1,10 +1,10 @@
 import { IconContext } from "react-icons";
 import { AiOutlineFile } from "react-icons/ai";
-import React from "react";
+import React,{ useState } from "react";
 
 function FileIcons(props) {
     return (
-        <div className="FileIcon">
+        <div>
             <IconContext.Provider value={{ size: "50px", color: "#666666" }}>
                 <props.icon />
             </IconContext.Provider>
@@ -23,6 +23,18 @@ function Files(props) {
         { key: "fileinfo_5", title: "5", icon: AiOutlineFile },
     ];
 
+    const [clicks, setClick] = useState([]);
+
+    const onClickHandler = selectedClick => {
+        if (clicks.includes(selectedClick)) {
+            setClick(clicks.filter(click => click !== selectedClick));
+            return;
+        }
+        setClick([...clicks, selectedClick]);
+    };
+
+    console.log(clicks);
+
     function sendData(title) {
         props.setValue(title);
     }
@@ -31,11 +43,23 @@ function Files(props) {
         <div className="files">
             <ul>
                 {fileInfo.map((v) => (
-                    <div onClick={() => sendData(v.title)}>
-                        <li key={v.key}>
+                    <li 
+                        className={
+                            clicks.find(click => click === v.title)
+                                ? "FileIcon active"
+                                : "FileIcon"
+                        }
+                        onClick={() => {
+                            sendData(v.title);
+                            onClickHandler(v.title);
+                            }
+                        }
+                        key={v.key}
+                     >
+                        {
                             <FileIcons title={v.title} icon={v.icon} />
-                        </li>
-                    </div>
+                        }
+                    </li>
                 ))}
             </ul>
         </div>
