@@ -1,6 +1,9 @@
 import React from "react";
 import FileIcons from "./fileIcon";
-import { useState } from "react";
+
+// file list 표시
+// props로 넘어온 fileList의 파일들을 display
+// 파일 아이콘 클릭시 callback으로 넘어온 selectFile함수 호출
 
 function Files(props) {
     return (
