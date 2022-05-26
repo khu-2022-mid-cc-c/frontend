@@ -21,6 +21,22 @@ function Files(props) {
         { key: "fileinfo_3", title: "3", icon: AiOutlineFile },
         { key: "fileinfo_4", title: "4", icon: AiOutlineFile },
         { key: "fileinfo_5", title: "5", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "6", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "7", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "8", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "9", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "10", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "11", icon: AiOutlineFile },
+        { key: "fileinfo_2", title: "12", icon: AiOutlineFile },
+        { key: "fileinfo_3", title: "13", icon: AiOutlineFile },
+        { key: "fileinfo_4", title: "14", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "15", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "16", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "17", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "18", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "19", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "20", icon: AiOutlineFile },
+        { key: "fileinfo_5", title: "21", icon: AiOutlineFile },
     ];
 
     const [clicks, setClick] = useState([]);
