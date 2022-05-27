@@ -21,7 +21,9 @@ function FileManager() {
         if (!v.selected[0]) {
             setSelectedFiles(selectedFiles.concat([v]));
         } else {
-            setSelectedFiles([...selectedFiles].filter((cur) => cur !== v.key));
+            setSelectedFiles(
+                [...selectedFiles].filter((cur) => cur.key !== v.key)
+            );
         }
         v.selected[1](!v.selected[0]);
     };

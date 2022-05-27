@@ -5,7 +5,10 @@ import React from "react";
 function fileInfo(props) {
     return (
         <div id="fileInfo">
-            <p>{props.selectedFiles}</p>
+            {props.selectedFiles.map((v) => {
+                return <>{v.key}</>;
+            })}
+            선택됨
         </div>
     );
 }
