@@ -1,6 +1,6 @@
 import "./pdfViewer.css";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import resolvePath from "./lib/resourcePathResolve3";
 import ResourceNotFound from "./lib/resourceNotFound";
@@ -13,19 +13,21 @@ function PDFViewer() {
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
     const [pdfData, setPDFData] = useState("");
-    fetch(resolvedSrc)
-        .then((res) => {
-            if (res.status === 404) throw new Error("404");
-            else return res.blob();
-        })
-        .then((img) => {
-            const localUrl = URL.createObjectURL(img);
-            setPDFData(localUrl);
-        })
-        .catch((e) => {
-            console.log(e);
-            setPDFData(false);
-        });
+    useEffect(() => {
+        fetch(resolvedSrc)
+            .then((res) => {
+                if (res.status === 404) throw new Error("404");
+                else return res.blob();
+            })
+            .then((img) => {
+                const localUrl = URL.createObjectURL(img);
+                setPDFData(localUrl);
+            })
+            .catch((e) => {
+                console.log(e);
+                setPDFData(false);
+            });
+    });
 
     const icons = [
         { title: "share", icon: RiShareBoxLine, href: "/about" },

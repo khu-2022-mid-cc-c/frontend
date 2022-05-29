@@ -1,6 +1,6 @@
 import "./embedViewer.css";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import resolvePath from "./lib/resourcePathResolve2";
 import ResourceNotFound from "./lib/resourceNotFound";
@@ -13,19 +13,21 @@ function VideoViewer() {
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
     const [videoData, setVideoData] = useState("");
-    fetch(resolvedSrc)
-        .then((res) => {
-            if (res.status === 404) throw new Error("404");
-            else return res.blob();
-        })
-        .then((img) => {
-            const localUrl = URL.createObjectURL(img);
-            setVideoData(localUrl);
-        })
-        .catch((e) => {
-            console.log(e);
-            setVideoData(false);
-        });
+    useEffect(() => {
+        fetch(resolvedSrc)
+            .then((res) => {
+                if (res.status === 404) throw new Error("404");
+                else return res.blob();
+            })
+            .then((img) => {
+                const localUrl = URL.createObjectURL(img);
+                setVideoData(localUrl);
+            })
+            .catch((e) => {
+                console.log(e);
+                setVideoData(false);
+            });
+    });
 
     const [showHeader, setShowHeader] = useState(false);
     const icons = [

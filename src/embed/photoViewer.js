@@ -1,6 +1,6 @@
 import "./embedViewer.css";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import resolvePath from "./lib/resourcePathResolve";
 import ResourceNotFound from "./lib/resourceNotFound";
@@ -13,18 +13,20 @@ function PhotoViewer() {
     const { src } = useParams();
     const resolvedSrc = resolvePath(src);
     const [imageData, setImageData] = useState("");
-    fetch(resolvedSrc)
-        .then((res) => {
-            if (res.status === 404) throw new Error("404");
-            else return res.blob();
-        })
-        .then((img) => {
-            const localUrl = URL.createObjectURL(img);
-            setImageData(localUrl);
-        })
-        .catch((e) => {
-            setImageData(false);
-        });
+    useEffect(() => {
+        fetch(resolvedSrc)
+            .then((res) => {
+                if (res.status === 404) throw new Error("404");
+                else return res.blob();
+            })
+            .then((img) => {
+                const localUrl = URL.createObjectURL(img);
+                setImageData(localUrl);
+            })
+            .catch((e) => {
+                setImageData(false);
+            });
+    }, []);
 
     const [showHeader, setShowHeader] = useState(false);
     const icons = [

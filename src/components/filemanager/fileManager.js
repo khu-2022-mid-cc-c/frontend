@@ -7,7 +7,17 @@ import { useState } from "react";
 
 function FileManager() {
     // 이후 fetch api call하여 file list를 받아오도록 설계 예정
-    // const fileList = fetch("url")
+
+    const url = "";
+
+    // const { fileList, dirList } = fetch(url)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //         data.list.map((v) => {
+    //             v;
+    //         });
+    //     });
+
     const fileList = [
         { key: "fileinfo_5", title: "5", selected: useState(false) },
         { key: "fileinfo_2", title: "6", selected: useState(false) },
