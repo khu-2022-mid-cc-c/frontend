@@ -1,0 +1,91 @@
+/* ------------------- global ------------------- */
+.modalBtnZone {
+    display: flex;
+    width: 100%;
+    height: 12%;
+    justify-content: flex-end;
+}
+
+.modalBtnZone button {
+    cursor: pointer;
+}
+/* ------------------- global ------------------- */
+/* ------------------- make folder ------------------- */
+.makeFolderModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    padding: 4%;
+}
+
+.makeFolderModal input {
+    width: 98%;
+    height: 40px;
+    font-size: 15pt;
+}
+
+.makeFolderModal button {
+    width: 40%;
+    font-size: 16pt;
+    float: right;
+    background-color: #990e17;
+    border: #77050e;
+    color: #f3f2f1;
+}
+
+.makeFolderModal button:active {
+    background-color: #77050e;
+}
+
+/* ------------------- make folder ------------------- */
+/* ------------------- share drive ------------------- */
+.shareDriveModal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    padding: 4%;
+}
+
+.shareDriveModal input {
+    width: 98%;
+    height: 40px;
+    font-size: 15pt;
+}
+
+.shareDriveModal button {
+    width: 40%;
+    font-size: 16pt;
+    float: right;
+    background-color: #990e17;
+    border: #77050e;
+    color: #f3f2f1;
+}
+
+.shareDriveModal button:active {
+    background-color: #77050e;
+}
+/* ------------------- share drive ------------------- */
+/* ------------------- upload file ------------------- */
+.uploadFileModal {
+    height: 90%;
+    padding: 4%;
+}
+
+.uploadFileModal .fileDropZone {
+    display: flex;
+    height: 90%;
+    justify-content: center;
+    align-items: center;
+    color: #c1c2c3;
+}
+
+.uploadFileModal .fileDropZone.mouseOver {
+    border: 1px solid #c1c2c3;
+}
+
+.uploadFileModal .fileDropZone:active {
+    border: 1px solid #c1c2c3;
+}
+/* ------------------- upload file ------------------- */
