@@ -27,6 +27,8 @@ function ControllerItems(props) {
 
 function Sorts(props) {
     const methods = ["파일 이름", "수정 날짜", "파일 크기"];
+    const [kindsort, setKindSort] = useState("");
+    const [sortname, setSortName] = useState("");
     const [sort, setSort] = useState("");
 
     props.setClickSort(sort);
@@ -42,6 +44,8 @@ function Sorts(props) {
                             }`}
                             onClick={() => {
                                 props.onset(v, props.asc);
+                                setSortName(v);
+                                setSort(v+kindsort);
                             }}
                             key={v}
                         >
@@ -54,7 +58,8 @@ function Sorts(props) {
                 className={`sortingMethod ${props.asc ? "now" : ""}`}
                 onClick={() => {
                         props.onset(props.method, true);
-                        setSort(sort === "ascend" ? "ascend" : "ascend");
+                        setKindSort("ascend");
+                        setSort(sortname+"ascend");
                     }
                 }
             >
@@ -64,7 +69,8 @@ function Sorts(props) {
                 className={`sortingMethod ${props.asc ? "" : "now"}`}
                 onClick={() => {
                         props.onset(props.method, false);
-                        setSort(sort === "descend" ? "descend" : "descend");
+                        setKindSort("descend");
+                        setSort(sortname+"descend");
                     }
                 }
             >
