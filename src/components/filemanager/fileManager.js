@@ -9,12 +9,27 @@ function FileManager() {
     // 이후 fetch api call하여 file list를 받아오도록 설계 예정
     // const fileList = fetch("url")
     const fileList = [
-        { key: "fileinfo_5", title: "5", selected: useState(false) },
-        { key: "fileinfo_2", title: "6", selected: useState(false) },
-        { key: "fileinfo_1", title: "7", selected: useState(false) },
+        { key: "fileinfo_5", title: 5, selected: useState(false) },
+        { key: "fileinfo_2", title: 62, selected: useState(false) },
+        { key: "fileinfo_1", title: 7, selected: useState(false) },
     ];
+
+    const [sort, setSort] = useState("ascend");
     const [selectedFiles, setSelectedFiles] = useState([]);
 
+    // console.log(number);
+
+    if( sort === "ascend" ) {
+        fileList.sort((a, b) => a.title - b.title); // 오름차순
+    }
+    else if (sort === "descend"){
+        fileList.sort((a, b) => b.title - a.title); // 내림차순
+    }
+
+    // let fileList = fileListaa.sort((a, b) => b.title - a.title); // 내림차순
+    // const fileList = fileListaa.sort((a, b) => a.title - b.title); // 오름차순
+
+    
     // 특정 파일 아이콘을 클릭시 selectedList에 추가 및 selected를 true로 set
     // 선택된 특정 파일 아이콘을 클릭시 selectedList에서 제거 및 selected를 false로 set
     const selectFile = (v) => {
@@ -37,7 +52,10 @@ function FileManager() {
     return (
         <Layout>
             <div className="fileManager">
-                <Controller selectedFiles={selectedFiles} cancel={cancel} />
+                <Controller 
+                    setSort={setSort}
+                    selectedFiles={selectedFiles} cancel={cancel}
+                />
                 <FileInfo selectedFiles={selectedFiles} />
                 <Files
                     fileList={fileList}
