@@ -1,4 +1,12 @@
 /* ------------------- global ------------------- */
+.apiModalContents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 90%;
+    padding: 4%;
+}
+
 .modalBtnZone {
     display: flex;
     width: 100%;
@@ -9,16 +17,12 @@
 .modalBtnZone button {
     cursor: pointer;
 }
-/* ------------------- global ------------------- */
-/* ------------------- make folder ------------------- */
-.makeFolderModal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
-    padding: 4%;
-}
 
+.apiModalText {
+    text-align: center;
+}
+/* ------------------- global ------------------- */
+/* ------------------- makeFolder, shareDrive, renameFile  ------------------- */
 .makeFolderModal input {
     width: 98%;
     height: 40px;
@@ -38,39 +42,12 @@
     background-color: #77050e;
 }
 
-/* ------------------- make folder ------------------- */
-/* ------------------- share drive ------------------- */
-.shareDriveModal {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 90%;
-    padding: 4%;
-}
+/* ------------------- makeFolder, shareDrive, renameFile  ------------------- */
+/* ------------------- uploadFile ------------------- */
 
-.shareDriveModal input {
-    width: 98%;
-    height: 40px;
-    font-size: 15pt;
-}
-
-.shareDriveModal button {
-    width: 40%;
-    font-size: 16pt;
-    float: right;
-    background-color: #990e17;
-    border: #77050e;
-    color: #f3f2f1;
-}
-
-.shareDriveModal button:active {
-    background-color: #77050e;
-}
-/* ------------------- share drive ------------------- */
-/* ------------------- upload file ------------------- */
 .uploadFileModal {
-    height: 90%;
-    padding: 4%;
+    width: 100%;
+    height: 100%;
 }
 
 .uploadFileModal .fileDropZone {
@@ -88,4 +65,43 @@
 .uploadFileModal .fileDropZone:active {
     border: 1px solid #c1c2c3;
 }
-/* ------------------- upload file ------------------- */
+
+.FileUploader input[type="file"] {
+    display: none;
+}
+
+/* ------------------- uploadFile ------------------- */
+/* ------------------- embedFile ------------------- */
+.embeddingModal input {
+    width: 98%;
+    height: 40px;
+    font-size: 15pt;
+}
+
+.embeddingModal .embedModalBtns {
+    display: flex;
+}
+
+.embeddingModal .embedModalBtns button {
+    width: 100px;
+}
+/* ------------------- embedFile ------------------- */
+/* ------------------- deleteFile, setBg ------------------- */
+.deleteFileModal .modalBtnZone {
+    justify-content: space-around;
+}
+
+.deleteFileModal button {
+    width: 40%;
+    font-size: 16pt;
+    float: right;
+    background-color: #990e17;
+    border: #77050e;
+    color: #f3f2f1;
+}
+
+.deleteFileModal button:active {
+    background-color: #77050e;
+}
+
+/* ------------------- deleteFile, setBg ------------------- */

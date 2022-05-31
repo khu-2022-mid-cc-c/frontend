@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-function ShareDrive(props) {
-    const [user, setUser] = useState("");
+function RenameFile(props) {
+    const [fileName, setFileName] = useState("");
 
-    const share = () => {
-        const data = "id=" + user;
+    const renameFile = () => {
+        const data = "dirName=" + fileName;
 
         const xhr = new XMLHttpRequest();
         xhr.withCredentials = true;
@@ -16,7 +16,7 @@ function ShareDrive(props) {
 
         xhr.open(
             "POST",
-            `https://linkhu.which.menu/api/drive/manage/${props.driveId}/share`
+            `https://linkhu.which.menu/api/drive/manage/${props.driveId}/rename`
         );
 
         xhr.send(data);
@@ -24,19 +24,19 @@ function ShareDrive(props) {
 
     return (
         <div className="apiModalContents makeFolderModal">
-            <h2>드라이브 공유</h2>
+            <h2>파일 이름 변경</h2>
             <input
-                placeholder="공유할 유저 id 입력"
-                value={user}
+                placeholder="파일 이름 입력"
+                value={fileName}
                 onChange={(e) => {
-                    setUser(e.target.value);
+                    setFileName(e.target.value);
                 }}
             />
             <div className="modalBtnZone">
-                <button onClick={share}>공유</button>
+                <button onClick={renameFile}>변경</button>
             </div>
         </div>
     );
 }
 
-export default ShareDrive;
+export default RenameFile;

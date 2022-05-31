@@ -1,6 +1,6 @@
 import "./fileManager.css";
 import "./apiModal.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import Layout from "../layout/layout";
@@ -13,19 +13,51 @@ import MakeFolder from "./api/makeFolder";
 import ShareDrive from "./api/shareDrive";
 import UploadFile from "./api/uploadFile";
 import EmbedFile from "./api/embedFile";
-
-import resolveDrivePath from "./lib/urlPathResolve";
+import RenameFile from "./api/renameFile";
+import DeleteFile from "./api/deleteFile";
 
 function FileManager(props) {
     // 이후 fetch api call하여 file list를 받아오도록 설계 예정
     const { driveId } = useParams();
-    const url = resolveDrivePath(driveId);
-    // const fileList = fetch(url).then((res) => res.json()).then(() => {});
-    const fileList = [
-        { key: "fileinfo_5", title: "5", selected: useState(false) },
-        { key: "fileinfo_2", title: "6", selected: useState(false) },
-        { key: "fileinfo_1", title: "7", selected: useState(false) },
-    ];
+    const URL = `https://linkhu.which.menu/api/drive/file/${driveId}`;
+
+    const [fileList, setFileList] = useState([]);
+
+    const loadFileList = () => {
+        // let xhr = new XMLHttpRequest();
+        // xhr.timeout = 2000;
+        // xhr.withCredentials = true;
+        // xhr.onreadystatechange = (e) => {
+        //     if(xhr.readyState === xhr.DONE)
+        //         if(xhr.status === 200 || xhr.status === 201)
+        //             setFileList(JSON.parse(xhr.responseText))
+        // }
+        // xhr.ontimeout = (e) => {
+        //     console.log(e);
+        // };
+        // xhr.open("GET", URL);
+        // xhr.send();
+        setTimeout(() => {
+            setFileList([
+                {
+                    key: "fileinfo_5",
+                    title: "5.png",
+                },
+                {
+                    key: "fileinfo_2",
+                    title: "6.pdf",
+                },
+                {
+                    key: "fileinfo_1",
+                    title: "7.mp4",
+                },
+            ]);
+        }, 1000);
+    };
+    useEffect(() => {
+        loadFileList();
+    }, []);
+
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalSize, setModalSize] = useState("small");
@@ -34,19 +66,17 @@ function FileManager(props) {
     // 특정 파일 아이콘을 클릭시 selectedList에 추가 및 selected를 true로 set
     // 선택된 특정 파일 아이콘을 클릭시 selectedList에서 제거 및 selected를 false로 set
     const selectFile = (v) => {
-        if (!v.selected[0]) {
+        if (selectedFiles.find((elem) => elem.key === v.key) === undefined) {
             setSelectedFiles(selectedFiles.concat([v]));
         } else {
             setSelectedFiles(
                 [...selectedFiles].filter((cur) => cur.key !== v.key)
             );
         }
-        v.selected[1](!v.selected[0]);
     };
 
     // [n개 선택됨] 버튼 클릭시 selectedFiles를 초기화, fileList의 selected를 모두 false로 set
     const cancel = () => {
-        fileList.forEach((v) => v.selected[1](false));
         setSelectedFiles([]);
     };
 
@@ -60,26 +90,79 @@ function FileManager(props) {
     const onaction = (action) => {
         switch (action) {
             case "folder":
-                setModal(<MakeFolder />, "small");
+                setModal(
+                    <MakeFolder
+                        driveId={driveId}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "medium"
+                );
                 break;
             case "upload":
-                setModal(<UploadFile />, "large");
+                setModal(
+                    <UploadFile
+                        driveId={driveId}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "large"
+                );
                 break;
             case "share":
-                setModal(<ShareDrive />, "medium");
+                setModal(
+                    <ShareDrive
+                        driveId={driveId}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "medium"
+                );
                 break;
             case "delete":
+                setModal(
+                    <DeleteFile
+                        driveId={driveId}
+                        selectedFile={selectedFiles[0]}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "small"
+                );
                 break;
             case "move":
                 break;
             case "copy":
                 break;
             case "rename":
+                setModal(
+                    <RenameFile
+                        driveId={driveId}
+                        selectedFile={selectedFiles[0]}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "medium"
+                );
                 break;
             case "download":
                 break;
             case "embed":
-                setModal(<EmbedFile />, "large");
+                setModal(
+                    <EmbedFile
+                        driveId={driveId}
+                        selectedFile={selectedFiles[0]}
+                        close={() => {
+                            setShowModal(false);
+                        }}
+                    />,
+                    "large"
+                );
                 break;
             default:
                 break;
