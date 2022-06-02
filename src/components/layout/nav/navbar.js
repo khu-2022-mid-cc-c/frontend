@@ -30,10 +30,10 @@ function RightGroup() {
     ];
 
     return (
-        <div id="rightIconsGroup">
+        <div className="navRightIconsGroup">
             {icons.map((v) => {
                 return (
-                    <a href={v.href} title={v.title}>
+                    <a href={v.href} title={v.title} key={v.title}>
                         <div className={"navBtns"}>
                             <IconContext.Provider
                                 value={{ size: "24px", color: "white" }}
@@ -50,8 +50,16 @@ function RightGroup() {
 
 function Navbar(props) {
     return (
-        <div id="navTop">
-            <Menubtn onClick={props.toggleSidebar} />
+        <div className="navTop">
+            <div className="navLeftIconsGroup">
+                <Menubtn onClick={props.toggleSidebar} />
+                <a href="/">
+                    <img
+                        src={`${process.env.PUBLIC_URL}/logo.png`}
+                        alt="logo"
+                    ></img>
+                </a>
+            </div>
             <RightGroup />
         </div>
     );

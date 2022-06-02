@@ -14,7 +14,7 @@ function Layout(props) {
                     setShowSideBar(!showSideBar);
                 }}
             />
-            <div id="container">
+            <div className="container">
                 <SideBar show={showSideBar} />
                 <Wrapper
                     sideShown={showSideBar}
