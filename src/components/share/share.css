@@ -1,0 +1,15 @@
+.background-container {
+    height: 40%;
+    width: 100%;
+    position: relative;
+    background-repeat : no-repeat;
+    background-size : cover;
+}
+
+.background-container .icon {
+    position: absolute;
+    left: 96%;
+    top: 85%;
+    height: 20px;
+    width: 20px;
+}

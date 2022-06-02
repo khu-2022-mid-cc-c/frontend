@@ -1,7 +1,9 @@
 import Navbar from "../layout/nav/navbar";
-import Form from "../auth/form";
-import login from "../../assets/img/login.png";
-import "./login.css";
+import Register from "./register";
+import Login from "./login";
+
+import "./form.css";
+import authImg from "../../assets/img/login.png";
 
 export default function Main(props)
 {
@@ -10,7 +12,10 @@ export default function Main(props)
     return (
         <>
             <Navbar/>
-            <Form type={type}/>
+            <div className="auth-container">
+                <div className="aside-img"><img src={authImg}/></div>
+                {type === "LOGIN"?<Login/>:<Register/>}
+            </div>
         </>
     );
 }

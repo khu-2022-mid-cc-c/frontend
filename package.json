@@ -2,20 +2,24 @@
   "name": "learning_react",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://linkhu.which.menu",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.27.2",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.0.0",
+    "react-cookie": "^4.1.1",
     "react-dom": "^18.0.0",
-    "react-icons": "^4.3.1",
+    "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
     "react-transition-group": "^4.4.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3002 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

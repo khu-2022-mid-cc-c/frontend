@@ -2,7 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import Layout from "./components/layout/layout";
 import FileManager from "./components/filemanager/fileManager";
-import Login from "./components/auth/main";
+import AuthForm from "./components/auth/main";
+import ShareDrive from "./components/share/main";
 
 import "./App.css";
 
@@ -15,8 +16,9 @@ function App() {
                         <FileManager />
                     </Layout>
                 }/>
-                <Route path="/login" element={<Login type={"LOGIN"}/>} />
-                <Route path="/register" element={<Login type={"REGISTER"}/>} />
+                <Route path="/login" element={<AuthForm type={"LOGIN"}/>} />
+                <Route path="/register" element={<AuthForm type={"REGISTER"}/>} />
+                <Route path="/share/:id" element={<ShareDrive/>} />
             </Routes>
         </Router>
     );
