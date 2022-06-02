@@ -84,7 +84,6 @@ function Controller(props) {
     let { selectedFiles } = props;
     let displayMode = selectedFiles.length < 2 ? selectedFiles.length : 2;
 
-    let command = () => {};
     const controlBtns = [
         [
             {
@@ -93,9 +92,9 @@ function Controller(props) {
                 icon: MdOutlineCreateNewFolder,
             },
             { key: "upload", title: "업로드", icon: MdOutlineFileUpload },
+            { key: "share", title: "공유", icon: IoMdShareAlt },
         ],
         [
-            { key: "share", title: "공유", icon: IoMdShareAlt },
             { key: "delete", title: "삭제", icon: MdDeleteOutline },
             { key: "move", title: "이동", icon: MdDriveFileMoveOutline },
             { key: "copy", title: "복사", icon: MdFileCopy },
@@ -105,7 +104,6 @@ function Controller(props) {
                 icon: MdDriveFileRenameOutline,
             },
             { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
-            { key: "upload", title: "업로드", icon: MdOutlineFileUpload },
             { key: "embed", title: "임베드", icon: ImEmbed2 },
         ],
         [
@@ -127,7 +125,12 @@ function Controller(props) {
         <div className="controller">
             <ul>
                 {controlBtns[displayMode].map((v) => (
-                    <li key={v.key} onClick={command(v.title)}>
+                    <li
+                        key={v.key}
+                        onClick={() => {
+                            props.onaction(v.key);
+                        }}
+                    >
                         <ControllerItems title={v.title} icon={v.icon} />
                     </li>
                 ))}
