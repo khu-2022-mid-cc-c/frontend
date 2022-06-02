@@ -33,6 +33,9 @@ function myModal(props) {
             shouldCloseOnOverlayClick={true}
             onRequestClose={props.close}
             style={{
+                overlay: {
+                    zIndex: 100,
+                },
                 content: {
                     position: "absolute",
                     top: "50%",

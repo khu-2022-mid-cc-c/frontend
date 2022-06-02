@@ -45,7 +45,7 @@ function Sorts(props) {
                             onClick={() => {
                                 props.onset(v, props.asc);
                                 setSortName(v);
-                                setSort(v+kindsort);
+                                setSort(v + kindsort);
                             }}
                             key={v}
                         >
@@ -57,22 +57,20 @@ function Sorts(props) {
             <div
                 className={`sortingMethod ${props.asc ? "now" : ""}`}
                 onClick={() => {
-                        props.onset(props.method, true);
-                        setKindSort("ascend");
-                        setSort(sortname+"ascend");
-                    }
-                }
+                    props.onset(props.method, true);
+                    setKindSort("ascend");
+                    setSort(sortname + "ascend");
+                }}
             >
                 오름차순
             </div>
             <div
                 className={`sortingMethod ${props.asc ? "" : "now"}`}
                 onClick={() => {
-                        props.onset(props.method, false);
-                        setKindSort("descend");
-                        setSort(sortname+"descend");
-                    }
-                }
+                    props.onset(props.method, false);
+                    setKindSort("descend");
+                    setSort(sortname + "descend");
+                }}
             >
                 내림차순
             </div>
@@ -144,7 +142,7 @@ function Controller(props) {
                         }}
                     >
                         <ControllerItems
-                            title={`${displayMode}개 선택됨`}
+                            title={`${selectedFiles.length}개 선택됨`}
                             icon={MdClose}
                         />
                     </div>

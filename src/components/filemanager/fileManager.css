@@ -17,6 +17,7 @@
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #c1c2c3;
+    z-index: 10;
 }
 
 .controller > ul {
@@ -112,23 +113,23 @@
     float: right;
     border-left: 1px solid #c1c2c3;
 }
-#fileInfos #fileInfo{
-        border-bottom: 1px solid #688FF4;
-        display: block;
-        color: black;
-        width: 240px;
-        padding: 0 10px 10px 10px;
-        margin-left: 20px;
-        font-size: 15px;
-        font-weight: bolder !important;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: normal;
-        line-height: 1.2;
-        text-align: left;
-        word-wrap: break-word;
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
+#fileInfos #fileInfo {
+    border-bottom: 1px solid #688ff4;
+    display: block;
+    color: black;
+    width: 240px;
+    padding: 0 10px 10px 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bolder !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
 }
 @media (max-width: 1000px) {
     #fileInfo {
