@@ -2,7 +2,7 @@
 .apiModalContents {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /*justify-content: space-between;*/ /* 뷰가 깨져보여 주석처리 하였습니다. 만약 이 부분 말고도 사용되는 부분이 있었다면 파일 업로더 부분에 예외처리가 필요합니다. */
     height: 90%;
     padding: 4%;
 }
