@@ -7,10 +7,12 @@ import EmbedRenderer from "./embed/embedRenderer";
 
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<FileManager />}></Route>
-            <Route path="/embed/*" element={<EmbedRenderer />}></Route>
-        </Routes>
+        <>
+            <Routes>
+                <Route path="/embed/*" element={<EmbedRenderer />}></Route>
+                <Route path="/:driveId" element={<FileManager />}></Route>
+            </Routes>
+        </>
     );
 }
 
