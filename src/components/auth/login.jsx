@@ -20,13 +20,14 @@ export default function Login()
       });
     };
 
+     //회원 로그인 클릭
     const onClickLogin = async () => {
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/login', login);
-            //로그인 성공시, 파일 관리 페이지로 이동
+            //로그인 성공시, 드리아브 페이지로 이동
             if(response.data.result) {
                 setCookies('token', response.data.token);
-                navigate("/");
+                navigate("/drives");
             }
             else alert("아이디 또는 비밀번호가 틀렸습니다.");
         } catch(err) {
@@ -34,19 +35,25 @@ export default function Login()
         }
     }
 
+    //게스트 로그인 클릭
     const guestClickHandler = async () => {
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/guest');
             if(response.data.result) {
                 setCookies('id', response.data.credentials.id);
                 if(isCookies('token')) document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                navigate("/");
+                navigate("/drives");
             }
             else alert("게스트 로그인에 실패했습니다.");
         } catch(err) {
             console.log(err);
         }
     }
+
+    useEffect(() => {
+        if(isCookies('token')) document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        if(isCookies('id')) document.cookie = 'id' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }, [])
 
     return(
         <div className="Form-Container">

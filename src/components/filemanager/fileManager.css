@@ -1,49 +1,205 @@
-#fileManager {
-    display:flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height:100%;
+.fileManager {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 300px;
+    grid-template-rows: 48px 1fr;
 }
 
 /* ----------------- Controller ---------------- */
-#controller {
+.controller {
+    grid-row: 1;
+    grid-column: 1;
+
     position: sticky;
+    /* background-color: red; */
     left: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: calc(100% - 301px);
-    height: 48px;
+    border-bottom: 1px solid #c1c2c3;
+    z-index: 10;
+}
+
+.controller > ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 1%;
+}
+.controllerItem {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    margin: 3px;
+    padding: 5px;
+    padding-right: 0px;
+    width: 100%;
+    cursor: pointer;
+}
+.controllerItem:hover {
+    background-color: #f1f2f3;
+}
+.controllerItem:active {
+    background-color: #e1e2e3;
+}
+.controllerItem > span {
+    margin-left: 1%;
+}
+.controller > .leftControllerGroup {
+    display: flex;
+    align-items: center;
+    margin-right: 1%;
+}
+.controller > .sort {
+    margin-right: 1%;
+}
+
+.sortingFrame {
+    position: absolute;
+    top: 48px;
+    right: 10px;
+    border: 1px solid #c1c2c3;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px #dddddd;
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s opacity;
+}
+.sortingFrame.hide {
+    opacity: 0;
+    transition: 0.3s opacity;
+}
+
+.sortingMethods {
     border-bottom: 1px solid #c1c2c3;
 }
 
-#controller > ul { display: flex; justify-content: space-between; align-items: center; width: 40%; min-width: 400px; padding-left: 1%;}
-.controllerItem { display: flex; align-items: center; border-radius: 10px; padding: 5px; width: 100%} 
-.controllerItem:hover { background-color: #f1f2f3; }
-.controllerItem:active { background-color: #e1e2e3; }
-.controllerItem > span{ margin-left: 5px; }
-#controller > #sort { margin-right: 1%; }
+.sortingMethod {
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.sortingMethod.now {
+    background-color: #f1f2f3;
+}
+
+.sortingMethod:hover {
+    background-color: #f1f2f3;
+}
+
+.sortingMethod:active {
+    background-color: #e1e2e3;
+}
 
 @media (max-width: 600px) {
-    .controllerItem { display: none; }
+    .controllerItem {
+        display: none;
+    }
 }
 
 @media (max-width: 1000px) {
-    #controller { width: calc(100% - 1px); }
+    .controller {
+        width: calc(100% - 1px);
+    }
 }
 /* ----------------- Controller ---------------- */
 /* ----------------- File Info ---------------- */
-#fileInfo {
+.fileInfos {
+    grid-row: 1 / 3;
+    grid-column: 2;
     position: sticky;
     display: block;
-    top: 0px; right: 0px;
-    width: 300px;
-    height: 100%;
     background-color: #f1f2f3;
+    float: right;
     border-left: 1px solid #c1c2c3;
+}
+.fileInfos .fileInfo {
+    border-bottom: 1px solid #688ff4;
+    display: block;
+    color: black;
+    width: 240px;
+    padding: 0 10px 10px 10px;
+    margin-left: 20px;
+    font-size: 15px;
+    font-weight: bolder !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    line-height: 1.2;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+@media (max-width: 1000px) {
+    .fileInfo {
+        display: none;
+    }
+}
+/* ----------------- File Info ---------------- */
+/* ----------------- Files ---------------- */
+.files {
+    grid-row: 2;
+    grid-column: 1;
+    position: sticky;
+}
+
+.files ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.files li {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.FileIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    border: 1px solid #f1f2f3;
+    padding: 12px;
+    margin: 5px;
+}
+
+.FileIcon.selected {
+    background-color: #f1f2f3;
+}
+
+.FileIcon .FileTitle {
+    margin-top: 4px;
+    text-align: center;
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+    color: rgba(0, 0, 0, 0.4);
+}
+.FileIcon:hover {
+    background-color: #f1f2f3;
+}
+.FileIcon:active {
+    background-color: #e1e2e3;
+}
+
+@media (max-width: 600px) {
+    .FileIcon {
+        display: none;
+    }
 }
 
 @media (max-width: 1000px) {
-    #fileInfo { display: none; }
+    #files {
+        width: calc(100% - 1px);
+    }
 }
-/* ----------------- File Info ---------------- */
+/* ----------------- Files ---------------- */

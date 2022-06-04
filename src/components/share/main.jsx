@@ -1,14 +1,13 @@
-import Navbar from "../layout/nav/navbar";
+import Layout from "../layout/layout";
 import BackImg from "./backImg";
 
 import "./share.css";
 
-export default function Main()
-{
-    return(
+export default function Main() {
+    return (
         <>
-            <Navbar/>
-            <BackImg/>
+            <Layout />
+            <BackImg />
         </>
     );
 }
