@@ -1,0 +1,116 @@
+.auth-container {
+    margin-left: 10%;
+    display: flex;
+    height: 100%;
+}
+
+.aside-img {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.Form-Container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+.Form-Container .Form-container {
+    width: 38%;
+    height: 50vh;
+    margin-bottom: 10vh;
+    margin-right: 15%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(249, 249, 249);
+    box-shadow: 3px 3px 3px 3px #7373731b;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.Form-Container .login-text {
+    margin-right: 5vh;
+    border: solid #9a0e17 1vh;
+    border-bottom: 0;
+    border-right: 0;
+    border-top: 0;
+    margin-top: 10vh;
+    font-size: 3vh;
+    color: #9a0e17;
+    padding-left: 3vh;
+    font-weight: bold;
+    cursor: default;
+}
+
+.Form-Container .wrap-container {
+    margin-left: 5vh;
+    margin-top: 5vh;
+}
+
+.Form-Container label {
+    color: #737373;
+    cursor: text;
+    font-size: 1.7vh;
+    pointer-events: none;
+}
+
+.Form-Container input {
+    width: 80%;
+    height: 3vh;
+    margin-bottom: 1vh;
+    border: solid #737373 1px;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    background-color: transparent;
+}
+
+.Form-Container input:focus {
+    outline: none;
+    font-size: 16px;
+}
+
+.Form-Container .login-btn {
+    margin-top: 2vh;
+    width: 80%;
+    height: 3.5vh;
+    color: #ffffff;
+    background-color: #162238;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5vh;
+    border-radius: 3px;
+}
+
+.Form-Container .register-btn-container {
+    margin-top: 5vh;
+    margin-left: 3vh;
+}
+
+.Form-Container .guest-btn {
+    height: 30px;
+    color: #737373;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    padding-right: 10px;
+    font-size: 1.3vh;
+}
+
+.Form-Container .register-btn {
+    height: 30px;
+    color: #162238;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 1.3vh;
+}

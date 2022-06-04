@@ -1,0 +1,105 @@
+.driveList {
+    height: 96%;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.driveListAbove {
+    width: 98%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.driveListAbove .driveListTitle {
+    margin-left: 1%;
+    padding-left: 10px;
+    font-size: 32px;
+    border-left: 3px solid #990e17;
+}
+
+.driveListAbove .driveListAdd {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}
+
+.driveListAbove .driveListAdd {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    border-radius: 10px;
+    padding: 5px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+.driveListAbove .driveListAdd:hover {
+    background-color: #f1f2f3;
+}
+.driveListAbove .driveListAdd:active {
+    background-color: #e1e2e3;
+}
+
+.drives {
+    display: flex;
+    flex-direction: column;
+    border: #d1d2d3 solid 1px;
+    width: 98%;
+    height: 100%;
+    margin-top: 1%;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.driveItem {
+    width: 98%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: #d1d2d3 solid 1px;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 12px;
+}
+
+.driveTxt {
+    display: flex;
+    align-items: flex-end;
+}
+
+.driveTxt .driveName {
+    margin-left: 12px;
+    font-size: 20px;
+}
+
+.driveTxt .driveDesc {
+    margin-left: 30px;
+    font-size: 12px;
+    color: #999999;
+}
+
+.driveItem.own {
+    background-color: #eeffff;
+}
+
+.driveItem.own:hover {
+    background-color: #ddffff;
+}
+
+.driveItem.own:active {
+    background-color: #ccffff;
+}
+
+.driveItem.shared {
+    background-color: #ffffee;
+}
+
+.driveItem.shared:hover {
+    background-color: #ffffdd;
+}
+
+.driveItem.shared:active {
+    background-color: #ffffbb;
+}
