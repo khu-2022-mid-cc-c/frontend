@@ -6,6 +6,11 @@ import FileIcons from "./fileIcon";
 // 파일 아이콘 클릭시 callback으로 넘어온 selectFile함수 호출
 
 function Files(props) {
+    const selected = props.selectedFiles.reduce((acc, cur) => {
+        acc[cur.key] = true;
+        return acc;
+    }, {});
+
     return (
         <div className="files">
             <ul>
@@ -15,7 +20,7 @@ function Files(props) {
                             <FileIcons
                                 title={v.title}
                                 icon={v.icon}
-                                selected={v.selected[0]}
+                                selected={selected[v.key]}
                             />
                         </li>
                     </div>

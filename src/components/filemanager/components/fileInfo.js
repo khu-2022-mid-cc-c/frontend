@@ -4,11 +4,10 @@ import React from "react";
 
 function fileInfo(props) {
     return (
-        <div id="fileInfo">
+        <div id="fileInfos">
             {props.selectedFiles.map((v) => {
-                return <>{v.key}</>;
+                return <p id="fileInfo">{v.key}</p>;
             })}
-            선택됨
         </div>
     );
 }
