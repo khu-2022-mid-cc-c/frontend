@@ -1,4 +1,4 @@
-import callAPI from "./callAPI";
+import callAPI from "../../lib/callAPI";
 
 function DeleteFile(props) {
     const deleteFile = () => {

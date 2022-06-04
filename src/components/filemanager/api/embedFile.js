@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import callAPI from "./callAPI";
+import { useState } from "react";
 
 const FILETYPE = {
     png: "photo",
@@ -11,61 +10,51 @@ const FILETYPE = {
 };
 
 function EmbedFile(props) {
-    const [embedTag, setEmbedTag] = useState("");
     const [embedLink, setEmbedLink] = useState("");
 
-    const selectedFileName = props.selectedFiles[0].name.split(".");
+    const selectedFile = props.selectedFiles[0];
+    const selectedFileName = selectedFile.name.split(".");
     const selectedFileExt = selectedFileName[selectedFileName.length - 1];
     const embedType = FILETYPE[selectedFileExt];
 
-    const data = "fileId=" + props.selectedFiles[0].name;
-    useEffect(() => {
-        callAPI(
-            "POST",
-            `https://linkhu.which.menu//api/drive/manage/${props.driveId}/embed`,
-            data
-        ).then((v) => setEmbedTag(v));
-    });
+    const embedSrc = selectedFile.download.url;
 
-    if (embedTag === "") {
-        return (
-            <div className="apiModalContents makeFolderModal">
-                <h2>파일 임베드</h2>
-            </div>
-        );
-    } else {
-        return (
-            <div className="apiModalContents embeddingModal">
-                <h2>파일 임베드</h2>
+    return (
+        <div className="apiModalContents embeddingModal">
+            <h2>파일 임베드</h2>
+            <div className="embedContent">
                 <iframe
                     id="embedModalFrame"
                     onLoad={(e) => {
                         setEmbedLink(e.target.src);
                     }}
-                    src={`/embed/${embedType}/${embedTag}`}
+                    src={`/embed/${embedType}/${encodeURIComponent(embedSrc)}`}
                     title="modalEmbeddedFile"
                     width="800px"
-                    height="600px"
+                    height="450px"
                 ></iframe>
-                <div className="embedModalBtns">
-                    <input disabled value={embedLink} />
-                    <button
-                        onClick={() => {
-                            navigator.clipboard.writeText(
-                                `<iframe
-                            src={${embedLink}}
-                            width="800px"
-                            height="600px"
-                            ></iframe>`
-                            );
-                        }}
-                    >
-                        복사
-                    </button>
-                </div>
             </div>
-        );
-    }
+            <div className="embedModalBtns">
+                <input
+                    disabled
+                    value={`<iframe src="${encodeURIComponent(
+                        embedLink
+                    )}" width="800px" height="600px"></iframe>`}
+                />
+                <button
+                    onClick={() => {
+                        navigator.clipboard.writeText(
+                            `<iframe src="${encodeURIComponent(
+                                embedLink
+                            )}" width="800px" height="600px"></iframe>`
+                        );
+                    }}
+                >
+                    복사
+                </button>
+            </div>
+        </div>
+    );
 }
 
 export default EmbedFile;

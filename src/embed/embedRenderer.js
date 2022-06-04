@@ -33,7 +33,7 @@ function Index() {
     );
 }
 
-function FileManager() {
+function EmbedRenderer() {
     return (
         <Routes>
             <Route path="/" element={<Index />}></Route>
@@ -44,4 +44,4 @@ function FileManager() {
     );
 }
 
-export default FileManager;
+export default EmbedRenderer;

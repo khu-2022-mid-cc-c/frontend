@@ -1,12 +1,13 @@
+const fileDownload = require("js-file-download");
+
 function downloadFiles(selectedFiles, onExpired) {
     const link = document.createElement("a");
     document.body.appendChild(link);
 
-    selectedFiles.forEach(async (element) => {
+    selectedFiles.forEach((element) => {
         const { url, expires } = element.download;
         if (Date.parse(expires) > Date.now()) {
-            link.href = url;
-            link.click();
+            fileDownload(url, element.name);
         } else {
             onExpired(
                 "다운로드 실패",
@@ -22,7 +23,6 @@ function downloadFiles(selectedFiles, onExpired) {
             );
         }
     });
-    document.body.removeChild(link);
 }
 
 export default downloadFiles;

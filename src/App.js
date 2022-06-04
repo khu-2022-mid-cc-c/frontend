@@ -9,6 +9,7 @@ import FileManager from "./components/filemanager/fileManager";
 import AuthForm from "./components/auth/main";
 import ShareDrive from "./components/share/main";
 import DriveList from "./components/driveList/driveList";
+import EmbedRenderer from "./embed/embedRenderer";
 
 import "./App.css";
 
@@ -23,8 +24,9 @@ function App() {
                     path="/register"
                     element={<AuthForm type={"REGISTER"} />}
                 />
+                <Route path="/embed/*" element={<EmbedRenderer />} />
                 <Route path="/share/:id" element={<ShareDrive />} />
-                <Route path="/" element={<Navigate to="/drive/asd" />}></Route>
+                <Route path="/" element={<Navigate to="/drives" />}></Route>
             </Routes>
         </Router>
     );

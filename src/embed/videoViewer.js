@@ -2,7 +2,6 @@ import "./embedViewer.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import resolvePath from "./lib/resourcePathResolve2";
 import ResourceNotFound from "./lib/resourceNotFound";
 
 import { IconContext } from "react-icons";
@@ -11,10 +10,11 @@ import { MdOutlineFileDownload } from "react-icons/md";
 
 function VideoViewer() {
     const { src } = useParams();
-    const resolvedSrc = resolvePath(src);
+    const url = decodeURIComponent(src);
     const [videoData, setVideoData] = useState("");
+
     useEffect(() => {
-        fetch(resolvedSrc)
+        fetch(url)
             .then((res) => {
                 if (res.status === 404) throw new Error("404");
                 else return res.blob();
@@ -27,7 +27,7 @@ function VideoViewer() {
                 console.log(e);
                 setVideoData(false);
             });
-    });
+    }, []);
 
     const [showHeader, setShowHeader] = useState(false);
     const icons = [
@@ -79,7 +79,7 @@ function VideoViewer() {
                     </div>
                 </div>
                 <video controls width="100%" height="100%">
-                    <source src={resolvedSrc} />
+                    <source src={videoData} />
                 </video>
             </div>
         );

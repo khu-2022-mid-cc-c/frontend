@@ -4,7 +4,7 @@ import { AiOutlineFolder } from "react-icons/ai";
 function DriveItem(props) {
     return (
         <div
-            className={`driveItem ${props.own ? "own" : "shared"}`}
+            className={`driveItem ${props.drive.is_owner ? "own" : "shared"}`}
             onClick={() => {
                 window.location.href = `/drive/${props.drive.id}`;
             }}
@@ -15,7 +15,9 @@ function DriveItem(props) {
             <div className="driveTxt">
                 <p className="driveName">{props.drive.name}</p>
                 <p className="driveDesc">
-                    {props.own ? "보유 드라이브" : "공유받은 드라이브"}
+                    {props.drive.is_owner
+                        ? "보유 드라이브"
+                        : "공유받은 드라이브"}
                 </p>
             </div>
         </div>

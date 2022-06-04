@@ -14,23 +14,72 @@ import {
 
 const controlBtns = [
     [
-        { key: "upload", title: "업로드", icon: MdOutlineFileUpload },
-        { key: "share", title: "공유", icon: IoMdShareAlt },
+        {
+            key: "upload",
+            title: "업로드",
+            icon: MdOutlineFileUpload,
+            condition: () => true,
+        },
+        {
+            key: "share",
+            title: "공유",
+            icon: IoMdShareAlt,
+            condition: () => true,
+        },
     ],
     [
         {
             key: "rename",
             title: "이름 바꾸기",
             icon: MdDriveFileRenameOutline,
+            condition: () => true,
         },
-        { key: "delete", title: "삭제", icon: MdDeleteOutline },
-        { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
-        { key: "embed", title: "임베드", icon: ImEmbed2 },
-        { key: "setbg", title: "배경 설정", icon: MdImage },
+        {
+            key: "delete",
+            title: "삭제",
+            icon: MdDeleteOutline,
+            condition: () => true,
+        },
+        {
+            key: "download",
+            title: "다운로드",
+            icon: MdOutlineFileDownload,
+            condition: () => true,
+        },
+        {
+            key: "embed",
+            title: "임베드",
+            icon: ImEmbed2,
+            // 확장자가 아래중 하나일 때만 나타남
+            condition: (files) => {
+                const fileNames = files[0].name.split(".");
+                const fileExt = fileNames[fileNames.length - 1];
+                return ["png", "jpg", "bmp", "mp4", "avi", "pdf"].includes(
+                    fileExt
+                );
+            },
+        },
+        {
+            key: "setbg",
+            title: "배경 설정",
+            icon: MdImage,
+            // 선택된 파일이 이미지일 때만 나타남
+            condition: (files) => files[0].type === "Image",
+        },
     ],
     [
-        { key: "delete", title: "삭제", icon: MdDeleteOutline },
-        { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
+        {
+            key: "delete",
+            title: "삭제",
+            icon: MdDeleteOutline,
+            condition: () => true,
+        },
+        {
+            key: "download",
+            title: "다운로드",
+            icon: MdOutlineFileDownload,
+            condition: () => true,
+        },
     ],
 ];
 
@@ -116,16 +165,18 @@ function Controller(props) {
     return (
         <div className="controller">
             <ul>
-                {controlBtns[displayMode].map((v) => (
-                    <li
-                        key={v.key}
-                        onClick={() => {
-                            props.onaction(v.key);
-                        }}
-                    >
-                        <ControllerItems title={v.title} icon={v.icon} />
-                    </li>
-                ))}
+                {controlBtns[displayMode]
+                    .filter((v) => v.condition(selectedFiles))
+                    .map((v) => (
+                        <li
+                            key={v.key}
+                            onClick={() => {
+                                props.onaction(v.key);
+                            }}
+                        >
+                            <ControllerItems title={v.title} icon={v.icon} />
+                        </li>
+                    ))}
             </ul>
             <div className="leftControllerGroup">
                 {displayMode > 0 && (

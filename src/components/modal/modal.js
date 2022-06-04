@@ -1,7 +1,10 @@
-import "./modal.css";
 import Modal from "react-modal";
+
 import { IconContext } from "react-icons";
 import { AiOutlineClose } from "react-icons/ai";
+
+import "./modal.css";
+import "./apiModal.css";
 
 const SIZE = {
     small: {

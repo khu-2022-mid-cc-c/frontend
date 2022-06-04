@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { getCookies } from "../../Util";
 
 /**
  * AWS 파일 업로더
@@ -16,25 +17,20 @@ const Uploader = (props) => {
     }
 
     const RequestFileUpload = async (file, callback = (percent) => {}) => {
-        const token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjU0MTk3MjM2LCJleHAiOjE2NTQyODM2MzZ9.ZpsXd2ZXbBdn-V709G3YmtlYVYFYVuEw-u3BeaOAhLE"; // Temp Token: 이후 로그인 연동하시면 변경해주세요.
-        const driveId = 4;
+        const token = getCookies("csrftoken");
 
-        const request = await fetch(
-            `https://linkhu.which.menu//api/drive/file/${driveId}`,
-            {
-                method: "POST",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-type": "application/json",
-                },
-                body: JSON.stringify({
-                    key: file.name,
-                    modified: file.lastModifiedDate.toISOString(),
-                    created: new Date(),
-                }),
-            }
-        );
+        const request = await fetch(props.uploadURL, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-type": "application/json",
+            },
+            body: JSON.stringify({
+                key: file.name,
+                modified: file.lastModifiedDate.toISOString(),
+                created: new Date(),
+            }),
+        });
         const json = await request.json();
         if (json.status === false) {
             return false;
@@ -162,9 +158,7 @@ function UploadFile(props) {
 
     return fileUploadProgress.length < 1 ? (
         <Uploader
-            uploadURL={
-                "https://linkhu-drive-4.s3.ap-northeast-2.amazonaws.com/test_file.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAZUKHZ3I5YS3D56LT%2F20220602%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20220602T193128Z&X-Amz-Expires=900&X-Amz-Signature=62bbcf33d5d9713b8396d4d3b6ae9a28a5bb5494600aa99ffbcf72e8d54476cb&X-Amz-SignedHeaders=host%3Bx-amz-meta-createdat%3Bx-amz-meta-updatedat%3Bx-amz-meta-uploader&x-amz-meta-createdat=2022-06-02T19%3A31%3A28.857Z&x-amz-meta-updatedat=2022-06-02T19%3A31%3A28.857Z&x-amz-meta-uploader=1"
-            }
+            uploadURL={`https://linkhu.which.menu//api/drive/file/${props.driveId}`}
             uploadBox={
                 <div
                     className="uploadFileModal"
@@ -215,6 +209,7 @@ function UploadFile(props) {
                 }
 
                 setFileUploadProgress([...currentFileUploadProgress]);
+                props.reload();
             }}
             OnUploadFail={(fileName, message) => {
                 const currentFileUploadProgress = fileUploadProgress;
@@ -232,6 +227,7 @@ function UploadFile(props) {
                 }
 
                 setFileUploadProgress([...currentFileUploadProgress]);
+                props.reload();
             }}
         />
     ) : (

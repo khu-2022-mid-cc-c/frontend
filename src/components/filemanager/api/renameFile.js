@@ -1,5 +1,5 @@
 import { useState } from "react";
-import callAPI from "./callAPI";
+import callAPI from "../../lib/callAPI";
 
 function RenameFile(props) {
     const [fileName, setFileName] = useState("");

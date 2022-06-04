@@ -2,7 +2,6 @@ import "./embedViewer.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import resolvePath from "./lib/resourcePathResolve";
 import ResourceNotFound from "./lib/resourceNotFound";
 
 import { IconContext } from "react-icons";
@@ -11,10 +10,11 @@ import { MdOutlineFileDownload } from "react-icons/md";
 
 function PhotoViewer() {
     const { src } = useParams();
-    const resolvedSrc = resolvePath(src);
+    const url = decodeURIComponent(src);
     const [imageData, setImageData] = useState("");
+
     useEffect(() => {
-        fetch(resolvedSrc)
+        fetch(url)
             .then((res) => {
                 if (res.status === 404) throw new Error("404");
                 else return res.blob();

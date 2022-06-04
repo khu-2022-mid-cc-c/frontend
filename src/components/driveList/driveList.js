@@ -5,6 +5,8 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 import Layout from "../layout/layout";
 import Modal from "../modal/modal";
+import OkModal from "../modal/okModal";
+import callAPI from "../lib/callAPI";
 
 import DriveItem from "./driveItem";
 import NewDrive from "./newDrive";
@@ -13,23 +15,31 @@ import "./driveList.css";
 function DriveList(props) {
     const [drives, setDrives] = useState([]);
     const [showModal, setShowModal] = useState(false);
+    const [modalContent, setModalContent] = useState(<></>);
+
+    const loadDrives = () => {
+        callAPI("GET", "https://linkhu.which.menu//api/drive/manage/list", null)
+            .then((data) => setDrives(data.drives))
+            .catch((error) => console.log(error));
+    };
+
+    const setModal = (content) => {
+        setModalContent(content);
+        setShowModal(true);
+    };
+
+    const showOkModal = (title, contents) => {
+        setModal(
+            <OkModal
+                title={title}
+                contents={contents}
+                close={() => setShowModal(false)}
+            />
+        );
+    };
 
     useEffect(() => {
-        // axios(config).then((res) => {setDrives(res.data)})
-        setTimeout(() => {
-            setDrives([
-                {
-                    id: "drive_id",
-                    name: "테스트 드라이브 1",
-                    is_owner: true,
-                },
-                {
-                    id: "drive_id_2",
-                    name: "테스트 드라이브 2",
-                    is_owner: false,
-                },
-            ]);
-        }, 1000);
+        loadDrives();
     }, []);
 
     return (
@@ -41,7 +51,16 @@ function DriveList(props) {
                         <span
                             className="driveListAdd"
                             onClick={() => {
-                                setShowModal(true);
+                                setModal(
+                                    <NewDrive
+                                        driveList={drives}
+                                        close={() => {
+                                            setShowModal(false);
+                                        }}
+                                        next={showOkModal}
+                                        reload={loadDrives}
+                                    />
+                                );
                             }}
                         >
                             <IconContext.Provider
@@ -54,7 +73,7 @@ function DriveList(props) {
                     </div>
                     <div className="drives">
                         {drives.map((v) => (
-                            <DriveItem drive={v} own={false} />
+                            <DriveItem key={v.id} drive={v} />
                         ))}
                     </div>
                 </div>
@@ -66,11 +85,7 @@ function DriveList(props) {
                 }}
                 size={"medium"}
             >
-                <NewDrive
-                    close={() => {
-                        setShowModal(false);
-                    }}
-                />
+                {modalContent}
             </Modal>
         </>
     );

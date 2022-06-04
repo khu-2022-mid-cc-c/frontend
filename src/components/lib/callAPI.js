@@ -1,8 +1,9 @@
+import { getCookies } from "../Util";
 const axios = require("axios");
 
-async function callAPI(method, url, data) {
+function callAPI(method, url, data) {
     return new Promise((resolve, reject) => {
-        const token = "";
+        const token = getCookies("csrftoken");
         const config = {
             method,
             url,
@@ -12,8 +13,8 @@ async function callAPI(method, url, data) {
 
         axios(config)
             .then(function (response) {
-                const data = JSON.stringify(response.data);
-                if (data.status) resolve(data);
+                const data = response.data;
+                if (data.result || data.status) resolve(data);
                 else reject(data);
             })
             .catch(function (error) {
@@ -21,14 +22,16 @@ async function callAPI(method, url, data) {
             });
 
         // const xhr = new XMLHttpRequest();
-        // xhr.withCredentials = true;
+        // // xhr.withCredentials = true;
 
         // xhr.readystatechange = (e) => {
         //     if (xhr.readyState === xhr.DONE) {
         //         if (xhr.status === 200 || xhr.status === 201) {
         //             resolve(JSON.parse(xhr.response));
+        //             console.log(JSON.parse(xhr.response));
         //         }
         //     } else {
+        //         console.log(JSON.parse(xhr.response));
         //         reject(`API CALL ${method} => ${url} has failed`);
         //     }
         // };
@@ -38,7 +41,7 @@ async function callAPI(method, url, data) {
         // };
 
         // xhr.open(method, url);
-        // xhr.setRequestHeader();
+        // xhr.setRequestHeader("Authorization", "Bearer " + token);
         // xhr.send(data);
     });
 }

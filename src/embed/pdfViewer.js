@@ -2,7 +2,6 @@ import "./pdfViewer.css";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import resolvePath from "./lib/resourcePathResolve3";
 import ResourceNotFound from "./lib/resourceNotFound";
 
 import { IconContext } from "react-icons";
@@ -11,10 +10,11 @@ import { MdOutlineFileDownload } from "react-icons/md";
 
 function PDFViewer() {
     const { src } = useParams();
-    const resolvedSrc = resolvePath(src);
+    const url = decodeURIComponent(src);
     const [pdfData, setPDFData] = useState("");
+
     useEffect(() => {
-        fetch(resolvedSrc)
+        fetch(url)
             .then((res) => {
                 if (res.status === 404) throw new Error("404");
                 else return res.blob();
@@ -27,7 +27,7 @@ function PDFViewer() {
                 console.log(e);
                 setPDFData(false);
             });
-    });
+    }, []);
 
     const icons = [
         { title: "share", icon: RiShareBoxLine, href: "/about" },
@@ -66,7 +66,7 @@ function PDFViewer() {
                     </div>
                 </div>
                 <embed
-                    src={resolvedSrc}
+                    src={pdfData}
                     className="pdf"
                     width="100%"
                     type="application/pdf"

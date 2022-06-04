@@ -1,4 +1,5 @@
 import { useState } from "react";
+import callAPI from "../lib/callAPI";
 
 function NewDrive(props) {
     const [driveName, setDriveName] = useState("");
@@ -6,17 +7,39 @@ function NewDrive(props) {
     const newDrive = () => {
         const data = "name=" + driveName;
 
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
+        if (driveName === "") {
+            props.next(
+                "드라이브 생성 실패",
+                <>드라이브 이름을 입력해주세요.</>
+            );
+            return;
+        }
 
-        xhr.readystatechange = (e) => {
-            if (xhr.readyState === xhr.DONE)
-                if (xhr.status === 200 || xhr.status === 201); // do something
-        };
-
-        xhr.open("POST", `https://linkhu.which.menu/api/drive/manage/create`);
-
-        xhr.send(data);
+        callAPI(
+            "POST",
+            "https://linkhu.which.menu//api/drive/manage/create",
+            data
+        )
+            .then(() => {
+                props.reload();
+                props.next(
+                    "드라이브 생성 성공",
+                    <>
+                        새로운 드라이브 <strong>{driveName}</strong>를
+                        생성하였습니다.
+                    </>
+                );
+            })
+            .catch(() => {
+                props.reload();
+                props.next(
+                    "드라이브 생성 실패",
+                    <>
+                        드라이브 <strong>{driveName}</strong>를 생성하지
+                        못했습니다.
+                    </>
+                );
+            });
     };
 
     return (
