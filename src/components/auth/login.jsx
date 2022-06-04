@@ -22,7 +22,7 @@ export default function Login()
 
     const onClickLogin = async () => {
         try {
-            const response = await axios.post('/api/user/auth/login', login);
+            const response = await axios.post('https://linkhu.which.menu//api/user/auth/login', login);
             //로그인 성공시, 파일 관리 페이지로 이동
             if(response.result) {
                 setCookies(response.token);

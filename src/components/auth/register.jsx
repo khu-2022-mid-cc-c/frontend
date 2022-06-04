@@ -24,7 +24,7 @@ function Register() {
 
     const onClickRegister = async () => {
         try {
-            const response = await axios.post('/api/user/auth/signup', forms);
+            const response = await axios.post('https://linkhu.which.menu//api/user/auth/signup', forms);
             //가입 성공시, 로그인 페이지로 이동
             if(response.result) navigate("/login");
             else alert(MESSAGE.find( m => m.message === response.message).result);
