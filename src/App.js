@@ -5,20 +5,31 @@ import FileManager from "./components/filemanager/fileManager";
 import AuthForm from "./components/auth/main";
 import ShareDrive from "./components/share/main";
 
+import PrivateRoute from "./components/route/Private";
+import PublicRoute from "./components/route/Public";
+
 import "./App.css";
 
 function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={
-                    <Layout>
-                        <FileManager />
-                    </Layout>
-                }/>
-                <Route path="/login" element={<AuthForm type={"LOGIN"}/>} />
-                <Route path="/register" element={<AuthForm type={"REGISTER"}/>} />
-                <Route path="/share/:id" element={<ShareDrive/>} />
+                 <Route path="/" element={<PrivateRoute />}>
+                    <Route path="/" element={
+                        <Layout>
+                            <FileManager />
+                        </Layout>
+                    }/>
+                </Route>
+                <Route path="/login" element={<PublicRoute />}>
+                    <Route path="" element={<AuthForm type={"LOGIN"}/>} />
+                </Route>
+                <Route path="/register" element={<PublicRoute />}>
+                    <Route path="" element={<AuthForm type={"REGISTER"}/>} />
+                </Route>
+                <Route path="/share/:id" element={<PrivateRoute />}>
+                    <Route path="" element={<ShareDrive/>} />
+                </Route>
             </Routes>
         </Router>
     );

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 //쿠키 내부 토큰 get, set 함수
-import { setCookies, getCookies } from "../Util";
+import { setCookies, getCookies, isCookies } from "../Util";
 
 export default function Login()
 {
@@ -24,12 +24,25 @@ export default function Login()
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/login', login);
             //로그인 성공시, 파일 관리 페이지로 이동
-            if(response.result) {
-                setCookies(response.token);
+            if(response.data.result) {
+                setCookies('token', response.data.token);
                 navigate("/");
             }
             else alert("아이디 또는 비밀번호가 틀렸습니다.");
-            console.log(response);
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    const guestClickHandler = async () => {
+        try {
+            const response = await axios.post('https://linkhu.which.menu//api/user/auth/guest');
+            if(response.data.result) {
+                setCookies('id', response.data.credentials.id);
+                if(isCookies('token')) document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                navigate("/");
+            }
+            else alert("게스트 로그인에 실패했습니다.");
         } catch(err) {
             console.log(err);
         }
@@ -55,7 +68,7 @@ export default function Login()
                     <div>
                         <button className="login-btn" onClick={onClickLogin}>로그인</button>
                         <div className="register-btn-container">
-                            <button className="guest-btn" onClick={ () => window.location.replace("/") }>게스트 모드로 계속하기</button>
+                            <button className="guest-btn" onClick={guestClickHandler}>게스트 모드로 계속하기</button>
                             <button className="register-btn" onClick={ () => window.location.replace("/register") }>| &nbsp;&nbsp;&nbsp;회원가입 </button>
                         </div>
                     </div>

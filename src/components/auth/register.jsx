@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { setCookies, getCookies, isCookies } from "../Util";
+
 function Register() {
     const navigate = useNavigate();
     //회원가입 비성공시, 메시지
     const MESSAGE = [
+        { message: "Not guest account", result: "게스트 계정이 아닙니다."}, 
         { message: "ID already exists", result: "존재하는 아이디입니다."}, 
         { message: "Nickname already exists", result: "존재하는 닉네임입니다."}, 
         { message: "Forbidden word contained", result: "ID나 닉네임에 금지된 문자가 포함되어 있습니다."}];
@@ -26,14 +29,25 @@ function Register() {
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/signup', forms);
             //가입 성공시, 로그인 페이지로 이동
-            if(response.result) navigate("/login");
-            else alert(MESSAGE.find( m => m.message === response.message).result);
-            console.log(response);
+            if(response.data.result) navigate("/login");
+            else alert(MESSAGE.find( m => m.message === response.data.message).result);
         } catch(err) {
             console.log(err);
         }
     }
   
+    const guestRegisterHandler = async () => {
+        try {
+            const response = await axios.post('https://linkhu.which.menu//api/user/auth/switch_guest', forms);
+            if(response.data.result) {
+                if(isCookies('id')) document.cookie = 'id' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+                navigate("/login");
+            }
+            else alert(MESSAGE.find( m => m.message === response.data.message).result);
+        } catch(err) {
+            console.log(err);
+        }
+    }
   
     return (
     <div className="Form-Container">
@@ -58,7 +72,7 @@ function Register() {
                         <input name="nickname" onChange={onChange} value={nickname} />
                     </div>
                 </div>
-                <button className="login-btn" onClick={onClickRegister}>회원가입</button> 
+                <button className="login-btn" onClick={ isCookies('id') ? guestRegisterHandler : onClickRegister }>회원가입</button> 
             </div>
         </div>
     </div>
