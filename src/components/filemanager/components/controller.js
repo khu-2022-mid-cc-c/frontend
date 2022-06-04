@@ -1,18 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { ImEmbed2 } from "react-icons/im";
 import { IoMdShareAlt } from "react-icons/io";
 import {
     MdClose,
     MdDeleteOutline,
-    MdDriveFileMoveOutline,
-    MdFileCopy,
     MdDriveFileRenameOutline,
     MdSort,
     MdOutlineFileDownload,
     MdOutlineFileUpload,
-    MdOutlineCreateNewFolder,
+    MdImage,
 } from "react-icons/md";
+
+const controlBtns = [
+    [
+        { key: "upload", title: "업로드", icon: MdOutlineFileUpload },
+        { key: "share", title: "공유", icon: IoMdShareAlt },
+    ],
+    [
+        {
+            key: "rename",
+            title: "이름 바꾸기",
+            icon: MdDriveFileRenameOutline,
+        },
+        { key: "delete", title: "삭제", icon: MdDeleteOutline },
+        { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
+        { key: "embed", title: "임베드", icon: ImEmbed2 },
+        { key: "setbg", title: "배경 설정", icon: MdImage },
+    ],
+    [
+        { key: "delete", title: "삭제", icon: MdDeleteOutline },
+        { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
+    ],
+];
 
 function ControllerItems(props) {
     return (
@@ -31,7 +51,9 @@ function Sorts(props) {
     const [sortname, setSortName] = useState("");
     const [sort, setSort] = useState("");
 
-    props.setClickSort(sort);
+    useEffect(() => {
+        props.setClickSort(sort);
+    }, [sort]);
 
     return (
         <div className={`sortingFrame ${props.show}`}>
@@ -82,42 +104,14 @@ function Controller(props) {
     let { selectedFiles } = props;
     let displayMode = selectedFiles.length < 2 ? selectedFiles.length : 2;
 
-    const controlBtns = [
-        [
-            {
-                key: "folder",
-                title: "폴더 만들기",
-                icon: MdOutlineCreateNewFolder,
-            },
-            { key: "upload", title: "업로드", icon: MdOutlineFileUpload },
-            { key: "share", title: "공유", icon: IoMdShareAlt },
-        ],
-        [
-            { key: "delete", title: "삭제", icon: MdDeleteOutline },
-            { key: "move", title: "이동", icon: MdDriveFileMoveOutline },
-            { key: "copy", title: "복사", icon: MdFileCopy },
-            {
-                key: "rename",
-                title: "이름 바꾸기",
-                icon: MdDriveFileRenameOutline,
-            },
-            { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
-            { key: "embed", title: "임베드", icon: ImEmbed2 },
-        ],
-        [
-            { key: "delete", title: "삭제", icon: MdDeleteOutline },
-            { key: "move", title: "이동", icon: MdDriveFileMoveOutline },
-            { key: "copy", title: "복사", icon: MdFileCopy },
-            { key: "download", title: "다운로드", icon: MdOutlineFileDownload },
-        ],
-    ];
-
     let [showSortingFrame, setShowSortingFrame] = useState(false);
     let [sortMethod, setSortMethod] = useState("파일 이름");
     let [ascOrder, setAscOrder] = useState(true);
     let [clickSort, setClickSort] = useState("");
 
-    props.setSort(clickSort);
+    useEffect(() => {
+        props.setSort(clickSort);
+    }, [clickSort]);
 
     return (
         <div className="controller">

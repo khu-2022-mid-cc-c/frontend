@@ -1,4 +1,5 @@
 import { useState } from "react";
+import callAPI from "./callAPI";
 
 function ShareDrive(props) {
     const [user, setUser] = useState("");
@@ -6,20 +7,31 @@ function ShareDrive(props) {
     const share = () => {
         const data = "id=" + user;
 
-        const xhr = new XMLHttpRequest();
-        xhr.withCredentials = true;
-
-        xhr.readystatechange = (e) => {
-            if (xhr.readyState === xhr.DONE)
-                if (xhr.status === 200 || xhr.status === 201); // do something
-        };
-
-        xhr.open(
+        callAPI(
             "POST",
-            `https://linkhu.which.menu/api/drive/manage/${props.driveId}/share`
-        );
-
-        xhr.send(data);
+            `https://linkhu.which.menu//api/drive/manage/${props.driveId}/share`,
+            data
+        )
+            .then((v) => {
+                props.reload();
+                props.next(
+                    "드라이브 공유 성공",
+                    <>
+                        사용자 <strong>{user}</strong>에게 드라이브가
+                        공유되었습니다.
+                    </>
+                );
+            })
+            .catch(() => {
+                props.reload();
+                props.next(
+                    "드라이브 공유 실패",
+                    <>
+                        사용자 <strong>{user}</strong>에게 드라이브를 공유하지
+                        못했습니다.
+                    </>
+                );
+            });
     };
 
     return (

@@ -7,7 +7,7 @@ import FileIcons from "./fileIcon";
 
 function Files(props) {
     const selected = props.selectedFiles.reduce((acc, cur) => {
-        acc[cur.key] = true;
+        acc[cur.name] = true;
         return acc;
     }, {});
 
@@ -15,15 +15,13 @@ function Files(props) {
         <div className="files">
             <ul>
                 {props.fileList.map((v) => (
-                    <div onClick={() => props.selectFile(v)} key={v.key}>
-                        <li key={v.key}>
-                            <FileIcons
-                                title={v.title}
-                                icon={v.icon}
-                                selected={selected[v.key]}
-                            />
-                        </li>
-                    </div>
+                    <li key={v.name} onClick={() => props.selectFile(v)}>
+                        <FileIcons
+                            title={v.name}
+                            type={v.type}
+                            selected={selected[v.name]}
+                        />
+                    </li>
                 ))}
             </ul>
         </div>

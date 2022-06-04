@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import callAPI from "./callAPI";
 
 const FILETYPE = {
     png: "photo",
@@ -13,32 +14,18 @@ function EmbedFile(props) {
     const [embedTag, setEmbedTag] = useState("");
     const [embedLink, setEmbedLink] = useState("");
 
-    const selectedFileName = props.selectedFile.title.split(".");
+    const selectedFileName = props.selectedFiles[0].name.split(".");
     const selectedFileExt = selectedFileName[selectedFileName.length - 1];
     const embedType = FILETYPE[selectedFileExt];
 
-    const embedFile = () => {
-        // const xhr = new XMLHttpRequest();
-        // const data = "fileId=" + props.selectedFile.Id;
-        // xhr.withCredentials = true;
-
-        // xhr.readystatechange = (e) => {
-        //     if (xhr.readyState === xhr.DONE)
-        //         if (xhr.status === 200 || xhr.status === 201)
-        //             setEmbedTag(JSON.parse(xhr.responseText));
-        // };
-
-        // xhr.open(
-        //     "POST",
-        //     `https://linkhu.which.menu/api/drive/manage/${props.driveId}/embed`
-        // );
-
-        // xhr.send(data);
-        setTimeout(() => {
-            setEmbedTag("asd");
-        }, 1000);
-    };
-    embedFile();
+    const data = "fileId=" + props.selectedFiles[0].name;
+    useEffect(() => {
+        callAPI(
+            "POST",
+            `https://linkhu.which.menu//api/drive/manage/${props.driveId}/embed`,
+            data
+        ).then((v) => setEmbedTag(v));
+    });
 
     if (embedTag === "") {
         return (
@@ -66,13 +53,10 @@ function EmbedFile(props) {
                         onClick={() => {
                             navigator.clipboard.writeText(
                                 `<iframe
-                            onLoad={(e) => {
-                                setEmbedLink(e.target.src);
-                            }}
                             src={${embedLink}}
                             width="800px"
                             height="600px"
-                        ></iframe>`
+                            ></iframe>`
                             );
                         }}
                     >

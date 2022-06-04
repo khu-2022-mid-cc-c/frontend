@@ -4,9 +4,13 @@ import React from "react";
 
 function fileInfo(props) {
     return (
-        <div id="fileInfos">
+        <div className="fileInfos">
             {props.selectedFiles.map((v) => {
-                return <p id="fileInfo">{v.key}</p>;
+                return (
+                    <p key={v.name} className="fileInfo">
+                        {v.name}
+                    </p>
+                );
             })}
         </div>
     );

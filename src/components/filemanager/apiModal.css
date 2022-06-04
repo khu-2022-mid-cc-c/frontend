@@ -20,13 +20,27 @@
 
 .apiModalText {
     text-align: center;
+    margin-bottom: 5%;
 }
+
+.apiModalContents h2 {
+    border-left: #990e17 solid 2px;
+    padding-left: 10px;
+}
+
 /* ------------------- global ------------------- */
 /* ------------------- makeFolder, shareDrive, renameFile  ------------------- */
+.makeFolderModal {
+    display: flex;
+    justify-content: space-between;
+}
+
 .makeFolderModal input {
     width: 98%;
     height: 40px;
     font-size: 15pt;
+    padding-left: 2%;
+    margin-bottom: 5%;
 }
 
 .makeFolderModal button {
@@ -87,6 +101,11 @@
 }
 /* ------------------- embedFile ------------------- */
 /* ------------------- deleteFile, setBg ------------------- */
+.deleteFileModal {
+    display: flex;
+    justify-content: space-between;
+}
+
 .deleteFileModal .modalBtnZone {
     justify-content: space-around;
 }
