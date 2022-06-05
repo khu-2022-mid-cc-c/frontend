@@ -26,13 +26,13 @@ function App() {
                 <Route path="/drives" element={<PrivateRoute />}>
                     <Route path="" element={<DriveList />} />
                 </Route>
-                <Route path="/" element={<PublicRoute />}>
+                <Route path="/login" element={<PublicRoute />}>
                     <Route path="" element={<AuthForm type={"LOGIN"}/>} />
                 </Route>
                 <Route path="/register" element={<PublicRoute />}>
                     <Route path="" element={<AuthForm type={"REGISTER"}/>} />
                 </Route>
-                <Route path="/about" element={<PublicRoute />}>
+                <Route path="/" element={<PublicRoute />}>
                     <Route path="" element={<About />} />
                 </Route>
                 <Route path="/share/:id" element={<PrivateRoute />}>

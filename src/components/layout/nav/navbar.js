@@ -27,8 +27,8 @@ function Menubtn(props) {
 
 function RightGroup() {
     const icons = [
-        { title: "info", icon: MdInfoOutline, href: "/about" },
-        { title: "logout", icon: IoMdLogOut, href: "/" },
+        { title: "info", icon: MdInfoOutline, href: "/" },
+        { title: "logout", icon: IoMdLogOut, href: "/login" },
     ];
 
     return (

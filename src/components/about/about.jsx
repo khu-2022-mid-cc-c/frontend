@@ -2,6 +2,8 @@ import Navbar from "../layout/nav/navbar";
 import backVid from "../../assets/video/about.mp4";
 import { IoChevronDown } from "react-icons/io5";
 
+import isAdmin from "../route/admin";
+
 import "./about.css";
 
 export default function About() {
@@ -22,7 +24,7 @@ export default function About() {
                    태그를 생<br/>성하여 블로그 포스트나 사이트에 첨부할 수 있다. 따라서 Linkhu은 단순히
                     데이<br/>터를 저장하는 드라이에서 나아가, 추억을 공유하는 플랫폼이라고도 할 수 있다.</div>
                     <IoChevronDown className="icon" size={25}/>
-                    <button className="btn" onClick={ () => window.location.replace("/") }>Go, Linkhu.</button>
+                    <button className="btn" onClick={ isAdmin() ? () => window.location.replace("/drives") : () => window.location.replace("/login") }>Go, Linkhu.</button>
             </div>
         </>
     );
