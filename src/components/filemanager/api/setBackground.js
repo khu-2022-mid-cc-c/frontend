@@ -2,24 +2,30 @@ import callAPI from "../../lib/callAPI";
 
 function SetBackground(props) {
     const setBackground = () => {
-        const data = "fileId=" + props.selectedFiles[0].Id;
+        const data = "key=" + props.selectedFiles[0].name;
         callAPI(
-            "DELETE",
-            `https://linkhu.which.menu//api/drive/manage/${props.driveId}`,
+            "POST",
+            `https://linkhu.which.menu//api/drive/file/${props.driveId}/background_image`,
             data
         )
             .then((v) => {
                 props.reload();
                 props.next(
                     "배경 설정 성공",
-                    <>사용자 에게 드라이브가 공유되었습니다.</>
+                    <>
+                        파일 <strong>{props.selectedFiles[0].name}</strong>을
+                        배경으로 설정하였습니다.
+                    </>
                 );
             })
             .catch(() => {
                 props.reload();
                 props.next(
                     "배경 설정 실패",
-                    <>사용자 에게 드라이브를 공유하지 못했습니다.</>
+                    <>
+                        파일 <strong>{props.selectedFiles[0].name}</strong>을
+                        배경으로 설정하지 못하였습니다.
+                    </>
                 );
             });
     };

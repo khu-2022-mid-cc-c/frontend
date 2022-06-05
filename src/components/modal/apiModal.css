@@ -58,9 +58,7 @@
 
 /* ------------------- makeFolder, shareDrive, renameFile  ------------------- */
 /* ------------------- uploadFile ------------------- */
-
 .uploadFileModal {
-    width: 100%;
     height: 100%;
 }
 
@@ -82,6 +80,52 @@
 
 .FileUploader input[type="file"] {
     display: none;
+}
+
+.uploadState {
+    display: flex;
+    padding: 2%;
+    padding-left: 3%;
+    background-color: #ffffdd;
+    border: 1px solid #eeeebb;
+    border-radius: 15px;
+    margin-top: 2%;
+}
+
+.uploadState strong {
+    padding-right: 3%;
+    border-right: 2px solid #bbbb66;
+}
+
+.uploadState progress {
+    appearance: none;
+    margin-left: 3%;
+}
+
+.uploadState progress::-webkit-progress-bar {
+    border: 2px solid black;
+    background: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: inset 3px 3px 10px #ccc;
+}
+
+.uploadState progress::-webkit-progress-value {
+    border-radius: 10px;
+    background: #1d976c;
+    background: -webkit-linear-gradient(to right, #93f9b9, #1d976c);
+    background: linear-gradient(to right, #93f9b9, #1d976c);
+}
+
+.uploadState .success {
+    font-weight: 600;
+    color: #3333ff;
+    margin-left: 3%;
+}
+
+.uploadState .failed {
+    font-weight: 600;
+    color: #ff3333;
+    margin-left: 3%;
 }
 
 /* ------------------- uploadFile ------------------- */
