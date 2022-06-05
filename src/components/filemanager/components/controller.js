@@ -96,13 +96,6 @@ function ControllerItems(props) {
 
 function Sorts(props) {
     const methods = ["파일 이름", "수정 날짜", "파일 크기"];
-    const [kindsort, setKindSort] = useState("");
-    const [sortname, setSortName] = useState("");
-    const [sort, setSort] = useState("");
-
-    useEffect(() => {
-        props.setClickSort(sort);
-    }, [sort]);
 
     return (
         <div className={`sortingFrame ${props.show}`}>
@@ -111,12 +104,13 @@ function Sorts(props) {
                     return (
                         <div
                             className={`sortingMethod ${
-                                props.method === v ? "now" : ""
+                                props.sort.method === v ? "now" : ""
                             }`}
                             onClick={() => {
-                                props.onset(v, props.asc);
-                                setSortName(v);
-                                setSort(v + kindsort);
+                                props.setSort({
+                                    method: v,
+                                    ascend: props.sort.ascend,
+                                });
                             }}
                             key={v}
                         >
@@ -126,21 +120,23 @@ function Sorts(props) {
                 })}
             </div>
             <div
-                className={`sortingMethod ${props.asc ? "now" : ""}`}
+                className={`sortingMethod ${props.sort.ascend ? "now" : ""}`}
                 onClick={() => {
-                    props.onset(props.method, true);
-                    setKindSort("ascend");
-                    setSort(sortname + "ascend");
+                    props.setSort({
+                        method: props.sort.method,
+                        ascend: true,
+                    });
                 }}
             >
                 오름차순
             </div>
             <div
-                className={`sortingMethod ${props.asc ? "" : "now"}`}
+                className={`sortingMethod ${props.sort.ascend ? "" : "now"}`}
                 onClick={() => {
-                    props.onset(props.method, false);
-                    setKindSort("descend");
-                    setSort(sortname + "descend");
+                    props.setSort({
+                        method: props.sort.method,
+                        ascend: false,
+                    });
                 }}
             >
                 내림차순
@@ -154,13 +150,6 @@ function Controller(props) {
     let displayMode = selectedFiles.length < 2 ? selectedFiles.length : 2;
 
     let [showSortingFrame, setShowSortingFrame] = useState(false);
-    let [sortMethod, setSortMethod] = useState("파일 이름");
-    let [ascOrder, setAscOrder] = useState(true);
-    let [clickSort, setClickSort] = useState("");
-
-    useEffect(() => {
-        props.setSort(clickSort);
-    }, [clickSort]);
 
     return (
         <div className="controller">
@@ -203,13 +192,8 @@ function Controller(props) {
             </div>
             <Sorts
                 show={showSortingFrame ? "" : "hide"}
-                method={sortMethod}
-                asc={ascOrder}
-                setClickSort={setClickSort}
-                onset={(method, asc) => {
-                    setSortMethod(method);
-                    setAscOrder(asc);
-                }}
+                sort={props.sort}
+                setSort={props.setSort}
             />
         </div>
     );

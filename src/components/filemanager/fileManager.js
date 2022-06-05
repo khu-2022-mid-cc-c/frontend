@@ -142,59 +142,37 @@ function FileManager(props) {
         loadFileList();
     }, []);
 
-    const [sort, setSort] = useState("파일 이름ascend");
+    const [sort, setSort] = useState({ method: "파일 이름", ascend: true });
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [modalSize, setModalSize] = useState("small");
     const [modalContent, setModalContent] = useState(<></>);
 
+    const sortMethod = {
+        "파일 이름": "name",
+        "수정 날짜": "updated_at",
+        "파일 크기": "size",
+    };
+
     useEffect(() => {
         const tmp = [...fileList];
-        if (sort === "파일 이름ascend") {
-            // 문자열 오름차순 정렬
-            tmp.sort((a, b) =>
-                b.name > a.name ? -1 : a.name > b.name ? 1 : 0
-            );
-            setFileList(tmp);
-        } else if (sort === "파일 이름descend") {
-            // 문자열 내림차순 정렬
-            tmp.sort((a, b) =>
-                b.name < a.name ? -1 : a.name > b.name ? 1 : 0
-            );
-            setFileList(tmp);
-        } else if (sort === "수정 날짜ascend") {
-            // 숫자 오름차순
-            tmp.sort((a, b) =>
-                Date(b.updated_at) > Date(a.updated_at)
-                    ? -1
-                    : Date(a.updated_at) > Date(b.updated_at)
-                    ? 1
-                    : 0
-            );
-            setFileList(tmp);
-        } else if (sort === "수정 날짜descend") {
-            // 숫자 내림차순
-            tmp.sort((a, b) =>
-                Date(b.updated_at) > Date(a.updated_at)
-                    ? -1
-                    : Date(a.updated_at) > Date(b.updated_at)
-                    ? 1
-                    : 0
-            );
-            setFileList(tmp);
-        } else if (sort === "파일 크기ascend") {
-            // 숫자 오름차순
-            tmp.sort((a, b) =>
-                b.title > a.title ? -1 : a.title > b.title ? 1 : 0
-            );
-            setFileList(tmp);
-        } else if (sort === "파일 크기ascend") {
-            // 숫자 오름차순
-            tmp.sort((a, b) =>
-                b.title > a.title ? -1 : a.title > b.title ? 1 : 0
-            );
-            setFileList(tmp);
-        }
+
+        const comparator = (a, b) => {
+            if (
+                a[sortMethod[sort.method]] > b[sortMethod[sort.method]] ===
+                sort.ascend
+            )
+                return 1;
+            else if (
+                a[sortMethod[sort.method]] < b[sortMethod[sort.method]] ===
+                sort.ascend
+            )
+                return -1;
+            else return 0;
+        };
+
+        tmp.sort(comparator);
+        setFileList(tmp);
     }, [sort]);
 
     // 특정 파일 아이콘을 클릭시 selectedList에 추가 및 selected를 true로 set
@@ -259,6 +237,7 @@ function FileManager(props) {
         <Layout>
             <div className="fileManager">
                 <Controller
+                    sort={sort}
                     setSort={setSort}
                     selectedFiles={selectedFiles}
                     cancel={cancel}
@@ -269,6 +248,9 @@ function FileManager(props) {
                     fileList={fileList}
                     selectedFiles={selectedFiles}
                     selectFile={selectFile}
+                    download={(v) => {
+                        downloadFiles([v], showOkModal);
+                    }}
                 />
             </div>
             <Modal
