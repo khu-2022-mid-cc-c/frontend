@@ -26,7 +26,9 @@ function EmbedFile(props) {
                 <iframe
                     id="embedModalFrame"
                     onLoad={(e) => {
-                        setEmbedLink(e.target.src);
+                        setEmbedLink(
+                            `<iframe src="${e.target.src}" width="800px" height="600px"></iframe>`
+                        );
                     }}
                     src={`/embed/${embedType}/${encodeURIComponent(embedSrc)}`}
                     title="modalEmbeddedFile"
@@ -35,19 +37,10 @@ function EmbedFile(props) {
                 ></iframe>
             </div>
             <div className="embedModalBtns">
-                <input
-                    disabled
-                    value={`<iframe src="${encodeURIComponent(
-                        embedLink
-                    )}" width="800px" height="600px"></iframe>`}
-                />
+                <input disabled value={embedLink} />
                 <button
                     onClick={() => {
-                        navigator.clipboard.writeText(
-                            `<iframe src="${encodeURIComponent(
-                                embedLink
-                            )}" width="800px" height="600px"></iframe>`
-                        );
+                        navigator.clipboard.writeText(embedLink);
                     }}
                 >
                     복사

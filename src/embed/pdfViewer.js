@@ -1,79 +1,23 @@
-import "./pdfViewer.css";
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-
-import ResourceNotFound from "./lib/resourceNotFound";
-
-import { IconContext } from "react-icons";
-import { RiShareBoxLine } from "react-icons/ri";
-import { MdOutlineFileDownload } from "react-icons/md";
+import EmbedViewer from "./embedViewer";
+import { useState } from "react";
 
 function PDFViewer() {
-    const { src } = useParams();
-    const url = decodeURIComponent(src);
-    const [pdfData, setPDFData] = useState("");
+    const [embedData, setEmbedData] = useState("");
 
-    useEffect(() => {
-        fetch(url)
-            .then((res) => {
-                if (res.status === 404) throw new Error("404");
-                else return res.blob();
-            })
-            .then((img) => {
-                const localUrl = URL.createObjectURL(img);
-                setPDFData(localUrl);
-            })
-            .catch((e) => {
-                console.log(e);
-                setPDFData(false);
-            });
-    }, []);
-
-    const icons = [
-        { title: "share", icon: RiShareBoxLine, href: "/about" },
-        { title: "download", icon: MdOutlineFileDownload, href: "/about" },
-    ];
-
-    if (pdfData === false) return <ResourceNotFound />;
-    else {
-        return (
-            <div className="pdfViewer">
-                <div className="pdfHeader">
-                    <span className="fileName">ㅁㄴㅇㄹ.pdf</span>
-                    <div className="pdfViewerIconSet">
-                        {icons.map((v) => {
-                            return (
-                                <a href={v.href} title={v.title} key={v.title}>
-                                    <div className="pdfViewerIcons">
-                                        <IconContext.Provider
-                                            value={{
-                                                size: "30px",
-                                                color: "white",
-                                            }}
-                                        >
-                                            <v.icon />
-                                        </IconContext.Provider>
-                                    </div>
-                                </a>
-                            );
-                        })}
-                        <div className="pdfViewerLogo">
-                            <img
-                                src={`${process.env.PUBLIC_URL}/logo.png`}
-                                alt="logo"
-                            ></img>
-                        </div>
-                    </div>
-                </div>
-                <embed
-                    src={pdfData}
-                    className="pdf"
-                    width="100%"
-                    type="application/pdf"
-                />
-            </div>
-        );
-    }
+    return (
+        <EmbedViewer
+            embedData={embedData}
+            setEmbedData={setEmbedData}
+            type="pdf"
+        >
+            <embed
+                src={embedData}
+                className="embedPdf"
+                width="100%"
+                type="application/pdf"
+            />
+        </EmbedViewer>
+    );
 }
 
 export default PDFViewer;
