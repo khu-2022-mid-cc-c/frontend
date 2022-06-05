@@ -15,18 +15,8 @@ function Files(props) {
         <div className="files">
             <ul>
                 {props.fileList.map((v) => (
-                    <li
-                        key={v.name}
-                        onClick={() => props.selectFile(v)}
-                        onDoubleClick={() => {
-                            props.download(v);
-                        }}
-                    >
-                        <FileIcons
-                            title={v.name}
-                            type={v.type}
-                            selected={selected[v.name]}
-                        />
+                    <li key={v.name} onClick={() => props.selectFile(v)}>
+                        <FileIcons file={v} selected={selected[v.name]} />
                     </li>
                 ))}
             </ul>

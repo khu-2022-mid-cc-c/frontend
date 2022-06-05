@@ -21,7 +21,7 @@ const controlBtns = [
             condition: () => true,
         },
         {
-            key: "share",
+            key: "share1",
             title: "공유",
             icon: IoMdShareAlt,
             condition: () => true,
@@ -44,6 +44,12 @@ const controlBtns = [
             key: "download",
             title: "다운로드",
             icon: MdOutlineFileDownload,
+            condition: () => true,
+        },
+        {
+            key: "share2",
+            title: "공유",
+            icon: IoMdShareAlt,
             condition: () => true,
         },
         {
