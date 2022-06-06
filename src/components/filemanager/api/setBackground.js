@@ -23,15 +23,14 @@ function SetBackground(props) {
     //     } 
     // }
     const setBackground = () => {
-        const data = "fileName=" + props.selectedFiles[0].name;
+        const data = "key=" + props.selectedFiles[0].name;
         callAPI(
             "POST",
             `https://linkhu.which.menu//api/drive/file/${props.driveId}/background_image`,
             data
         )
             .then((v) => {
-                const data = JSON.parse(v);
-                props.setBgUrl(data.folder.backgroundImage);
+                props.setBgName(props.selectedFiles[0].name);
                 props.reload();
                 props.next(
                     "배경 설정 성공",

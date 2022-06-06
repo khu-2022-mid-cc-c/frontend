@@ -37,6 +37,7 @@ function FileManager(props) {
     const headers = { headers: { Authorization: "Bearer " + getCookies('token') }};
 
     const [fileList, setFileList] = useState([]);
+    const [bgName, setBgName] = useState("");
     const [bgUrl, setBgUrl] = useState("");
 
     const loadFileList = () => {
@@ -156,6 +157,7 @@ function FileManager(props) {
     const getFileList = async () => {
         try {
             const response = await axios.get(URL, headers);
+            console.log(response.data)
             if(response.data.status) {
                 setBgUrl(response.data.folder.backgroundImage);
             }
@@ -167,7 +169,7 @@ function FileManager(props) {
     useEffect(() => {
         loadFileList();
         getFileList();
-    }, [bgUrl]);
+    }, [bgName]);
 
     const [sort, setSort] = useState("파일 이름ascend");
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -271,7 +273,7 @@ function FileManager(props) {
                         driveId={driveId}
                         fileList={fileList}
                         selectedFiles={selectedFiles}
-                        setBgUrl={setBgUrl}
+                        setBgName={setBgName}
                         close={() => {
                             setShowModal(false);
                         }}
