@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-//쿠키 내부 토큰 get, set 함수
-import { setCookies, getCookies, isCookies } from "../Util";
+import { setCookies, isCookies } from "../Util";
 
 export default function Login()
 {
     const navigate = useNavigate();
 
     const [login, setLogin] = useState({id: "", password: ""});
+    const [isGuest, setIsGuest] = useState(false);
     const { id, password } = login;
   
     const onChange = (e) => {
@@ -24,7 +24,7 @@ export default function Login()
     const onClickLogin = async () => {
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/login', login);
-            //로그인 성공시, 드리아브 페이지로 이동
+            //로그인 성공시, 드라이브 페이지로 이동
             if(response.data.result) {
                 setCookies('token', response.data.token);
                 navigate("/drives");
@@ -40,9 +40,9 @@ export default function Login()
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/guest');
             if(response.data.result) {
-                setCookies('id', response.data.credentials.id);
-                if(isCookies('token')) document.cookie = 'token' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-                navigate("/drives");
+                setLogin({id: response.data.credentials.id, password: response.data.credentials.password});
+                setIsGuest(true);
+                setCookies('id', 'guest');
             }
             else alert("게스트 로그인에 실패했습니다.");
         } catch(err) {
@@ -63,13 +63,13 @@ export default function Login()
                     <div>
                         <label>아이디</label>
                         <div>
-                            <input name="id" onChange={onChange} value={id} required/>
+                            <input name="id" onChange={onChange} value={!isGuest ? id : login.id} required/>
                         </div>
                     </div>
                     <div>
                         <label>비밀번호</label>
                         <div>
-                            <input name="password" onChange={onChange} value={password} required/>
+                            <input name="password" onChange={onChange} value={!isGuest ? password : login.password} required/>
                         </div>
                     </div>
                     <div>

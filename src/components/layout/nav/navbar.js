@@ -55,7 +55,7 @@ function Navbar(props) {
         <div className="navTop">
             <div className="navLeftIconsGroup">
                 <Menubtn onClick={props.toggleSidebar} />
-                <a href={!isAdmin() ? "/" : "/drives"}>
+                <a href={!isAdmin() || window.location.pathname === "/login" ? "/" : "/drives"}>
                     <img
                         src={`${process.env.PUBLIC_URL}/logo.png`}
                         alt="logo"

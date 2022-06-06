@@ -1,4 +1,4 @@
-import { FaShareAlt } from "react-icons/fa";
+import { FaShareAlt, FaRegUser } from "react-icons/fa";
 import {
     MdOutlineDriveFolderUpload,
     MdOutlineWatchLater,
@@ -6,6 +6,7 @@ import {
 import { CSSTransition } from "react-transition-group";
 import { IconContext } from "react-icons";
 import { useNavigate } from "react-router-dom";
+import { isCookies } from "../../Util";
 
 function SideBarItems(props) {
     const navigation = useNavigate();
@@ -51,14 +52,31 @@ function SideBar(props) {
             href: "/cry3",
             link: "/cry3"
         },
-        { key: "shared", title: "공유 폴더", icon: FaShareAlt, href: "/cry2", link: "/cry2" },
+        { 
+            key: "shared", 
+            title: "공유 폴더", 
+            icon: FaShareAlt, 
+            href: "/cry2", 
+            link: "/cry2" 
+        },
+        { 
+            key: "register", 
+            title: "회원가입", 
+            icon: FaRegUser, 
+            href: "/cry2", 
+            link: "/register" 
+        },
     ];
 
     return (
         <div className={className}>
             <ul>
                 {menuItems.map((v) => (
-                    <SideBarItems item={v} show={props.show} key={v.key} />
+                    <>
+                        {isCookies("id") ? <SideBarItems item={v} show={props.show} key={v.key} /> :
+                            v.key !== "register" && <SideBarItems item={v} show={props.show} key={v.key} />
+                        }
+                    </>
                 ))}
             </ul>
         </div>

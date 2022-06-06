@@ -40,7 +40,6 @@ function Register() {
         try {
             const response = await axios.post('https://linkhu.which.menu//api/user/auth/switch_guest', forms);
             if(response.data.result) {
-                if(isCookies('id')) document.cookie = 'id' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
                 navigate("/login");
             }
             else alert(MESSAGE.find( m => m.message === response.data.message).result);
@@ -72,7 +71,7 @@ function Register() {
                         <input name="nickname" onChange={onChange} value={nickname} />
                     </div>
                 </div>
-                <button className="login-btn" onClick={ isCookies('id') ? guestRegisterHandler : onClickRegister }>회원가입</button> 
+                <button className="login-btn" onClick={ isCookies('token') ? guestRegisterHandler : onClickRegister }>회원가입</button> 
             </div>
         </div>
     </div>

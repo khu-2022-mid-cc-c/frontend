@@ -1,21 +1,44 @@
 import callAPI from "./callAPI";
+import axios from "axios";
+import { getCookies, isCookies } from "../../Util";
 
 function SetBackground(props) {
+
+    // const setBackground = async () => {
+    //     try {
+    //         const response = await axios.post(`https://linkhu.which.menu//api/drive/file/${props.driveId}/background_image`, 
+    //             { key: props.selectedFiles[0].name },
+    //             {headers: {
+    //                 Authorization: "Bearer " + getCookies('token'),
+    //             }}
+    //             );
+    //         console.log(response.data)
+
+    //     } catch(err) {
+    //         props.reload();
+    //         props.next(
+    //             "배경 설정 실패",
+    //             <>사용자 에게 드라이브를 공유하지 못했습니다.</>
+    //         );
+    //     } 
+    // }
     const setBackground = () => {
-        const data = "fileId=" + props.selectedFiles[0].Id;
+        const data = "fileName=" + props.selectedFiles[0].name;
         callAPI(
-            "DELETE",
-            `https://linkhu.which.menu//api/drive/manage/${props.driveId}`,
+            "POST",
+            `https://linkhu.which.menu//api/drive/file/${props.driveId}/background_image`,
             data
         )
             .then((v) => {
+                const data = JSON.parse(v);
+                props.setBgUrl(data.folder.backgroundImage);
                 props.reload();
                 props.next(
                     "배경 설정 성공",
                     <>사용자 에게 드라이브가 공유되었습니다.</>
                 );
             })
-            .catch(() => {
+            .catch((v) => {
                 props.reload();
                 props.next(
                     "배경 설정 실패",
