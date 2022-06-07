@@ -18,10 +18,16 @@ function RenameFile(props) {
             return;
         }
 
-        const data = "fileName=" + fileName;
+        const data =
+            "key=" +
+            props.selectedFiles[0].name +
+            "&newKey=" +
+            encodeURI(fileName);
+
+        // console.log(data);
         callAPI(
             "POST",
-            `https://linkhu.which.menu//api/drive/manage/${props.driveId}`,
+            `https://linkhu.which.menu//api/drive/file/${props.driveId}/move_file`,
             data
         )
             .then((v) => {

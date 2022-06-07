@@ -118,7 +118,7 @@ function UploadProgress(props) {
         <div className="apiModalContents uploadFileModal">
             <h2>파일 업로드</h2>
             {props.files.map((file) => (
-                <div className="uploadState">
+                <div className="uploadState" key={file.fileName}>
                     <strong>{file.fileName}</strong>{" "}
                     {file.progress !== true ? (
                         <progress max="100" value={file.progress}>

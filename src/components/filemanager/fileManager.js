@@ -40,6 +40,7 @@ function FileManager(props) {
 
     const loadFileList = () => {
         callAPI("GET", url, null).then((res) => setFileList(res.list));
+        setSelectedFiles([]);
     };
     useEffect(() => {
         loadFileList();

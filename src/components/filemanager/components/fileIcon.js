@@ -14,11 +14,7 @@ function FileIcons(props) {
         Video: MdOndemandVideo,
         Document: IoDocumentTextOutline,
         Audio: IoMdMusicalNotes,
-        Image: () => (
-            <div className="imgFileIcon">
-                <img src={props.file.download.url} alt="imgFileIcon"></img>
-            </div>
-        ),
+        Image: MdPhotoCameraBack,
     };
 
     const Icon = iconType[props.file.type];
