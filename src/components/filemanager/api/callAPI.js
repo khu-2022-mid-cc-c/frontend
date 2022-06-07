@@ -2,18 +2,18 @@ const axios = require("axios");
 
 async function callAPI(method, url, data) {
     return new Promise((resolve, reject) => {
-        const token = "";
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjU0NTg2ODQ3LCJleHAiOjE2NTQ2NzMyNDd9.O-0Nx4UknokV7rPYtXu1q8JlazgeR-c2IyEt3plNflo";
         const config = {
             method,
             url,
             data,
             headers: { Authorization: "Bearer " + token },
         };
-
+    
         axios(config)
             .then(function (response) {
                 const data = JSON.stringify(response.data);
-                if (data.status) resolve(data);
+                if (response.data.status) resolve(data);
                 else reject(data);
             })
             .catch(function (error) {

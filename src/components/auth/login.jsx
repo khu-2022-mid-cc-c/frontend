@@ -69,7 +69,7 @@ export default function Login()
                     <div>
                         <label>비밀번호</label>
                         <div>
-                            <input name="password" onChange={onChange} value={!isGuest ? password : login.password} required/>
+                            <input type="password" name="password" onChange={onChange} value={!isGuest ? password : login.password} required/>
                         </div>
                     </div>
                     <div>
