@@ -13,7 +13,6 @@ function ShareDrive(props) {
             data
         )
             .then((v) => {
-                props.reload();
                 props.next(
                     "드라이브 공유 성공",
                     <>
@@ -23,7 +22,6 @@ function ShareDrive(props) {
                 );
             })
             .catch(() => {
-                props.reload();
                 props.next(
                     "드라이브 공유 실패",
                     <>
@@ -31,6 +29,13 @@ function ShareDrive(props) {
                         못했습니다.
                     </>
                 );
+                // props.next(
+                //     "드라이브 공유 성공",
+                //     <>
+                //         사용자 <strong>{user}</strong>에게 드라이브가
+                //         공유되었습니다.
+                //     </>
+                // );
             });
     };
 
@@ -45,7 +50,9 @@ function ShareDrive(props) {
                 }}
             />
             <div className="modalBtnZone">
-                <button onClick={share} style={{borderRadius: "3px"}}>공유</button>
+                <button onClick={share} style={{ borderRadius: "3px" }}>
+                    공유
+                </button>
             </div>
         </div>
     );

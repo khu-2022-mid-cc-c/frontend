@@ -101,7 +101,7 @@ function ControllerItems(props) {
 }
 
 function Sorts(props) {
-    const methods = ["파일 이름", "수정 날짜", "파일 크기"];
+    const methods = ["파일 이름", "수정 날짜", "업로드 날짜"];
 
     return (
         <div className={`sortingFrame ${props.show}`}>

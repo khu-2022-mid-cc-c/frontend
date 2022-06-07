@@ -12,7 +12,7 @@ function SideBarItems(props) {
     const navigation = useNavigate();
 
     return (
-        <li>
+        <li onClick={() => navigation(props.item.link)}>
             <div>
                 <div>
                     <IconContext.Provider
@@ -27,7 +27,9 @@ function SideBarItems(props) {
                     classNames={"fade"}
                     unmountOnExit
                 >
-                    <span style={{cursor: "pointer"}} onClick={ () => navigation(props.item.link) }>{props.item.title}</span>
+                    <span style={{ cursor: "pointer" }}>
+                        {props.item.title}
+                    </span>
                 </CSSTransition>
             </div>
         </li>
@@ -43,28 +45,28 @@ function SideBar(props) {
             title: "드라이브",
             icon: MdOutlineDriveFolderUpload,
             href: "/cry1",
-            link: "/drives"
+            link: "/drives",
         },
         {
             key: "recent",
             title: "최근 파일",
             icon: MdOutlineWatchLater,
             href: "/cry3",
-            link: "/cry3"
+            link: "/cry3",
         },
-        { 
-            key: "shared", 
-            title: "공유 폴더", 
-            icon: FaShareAlt, 
-            href: "/cry2", 
-            link: "/cry2" 
+        {
+            key: "shared",
+            title: "공유 폴더",
+            icon: FaShareAlt,
+            href: "/cry2",
+            link: "/cry2",
         },
-        { 
-            key: "register", 
-            title: "회원가입", 
-            icon: FaRegUser, 
-            href: "/cry2", 
-            link: "/register" 
+        {
+            key: "register",
+            title: "회원가입",
+            icon: FaRegUser,
+            href: "/cry2",
+            link: "/register",
         },
     ];
 
@@ -73,9 +75,21 @@ function SideBar(props) {
             <ul>
                 {menuItems.map((v) => (
                     <>
-                        {isCookies("id") ? <SideBarItems item={v} show={props.show} key={v.key} /> :
-                            v.key !== "register" && <SideBarItems item={v} show={props.show} key={v.key} />
-                        }
+                        {isCookies("id") ? (
+                            <SideBarItems
+                                item={v}
+                                show={props.show}
+                                key={v.key}
+                            />
+                        ) : (
+                            v.key !== "register" && (
+                                <SideBarItems
+                                    item={v}
+                                    show={props.show}
+                                    key={v.key}
+                                />
+                            )
+                        )}
                     </>
                 ))}
             </ul>

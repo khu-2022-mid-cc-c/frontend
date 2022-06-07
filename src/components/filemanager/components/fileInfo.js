@@ -12,10 +12,16 @@ function fileInfo(props) {
                 );
                 return (
                     <p key={v.name} className="fileInfo">
-                        <div class="fileInfoText">파일 이름 : {v.name}</div>
-                        <div class="fileInfoText">업로드 날짜 : {time}</div>
-                        <div class="fileInfoText">파일 형식 : {v.type}</div>
-                        <div class="fileInfoText">
+                        {v.type === "Image" ? (
+                            <img alt="" src={v.download.url}></img>
+                        ) : (
+                            ""
+                        )}
+
+                        <div className="fileInfoText">파일 이름 : {v.name}</div>
+                        <div className="fileInfoText">업로드 날짜 : {time}</div>
+                        <div className="fileInfoText">파일 형식 : {v.type}</div>
+                        <div className="fileInfoText">
                             닉네임 : {v.creator.nickname}
                         </div>
                     </p>

@@ -137,6 +137,11 @@
 .fileInfos .fileInfo .fileInfoText {
     line-height: 1.5;
 }
+
+.fileInfos .fileInfo img {
+    width: 100%;
+}
+
 @media (max-width: 1000px) {
     .fileInfo {
         display: none;

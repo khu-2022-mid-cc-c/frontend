@@ -17,10 +17,20 @@ function DriveList(props) {
     const [showModal, setShowModal] = useState(false);
     const [modalContent, setModalContent] = useState(<></>);
 
-    const loadDrives = () => {
-        callAPI("GET", "https://linkhu.which.menu//api/drive/manage/list", null)
+    const loadDrives = async () => {
+        await callAPI(
+            "GET",
+            "https://linkhu.which.menu//api/drive/manage/list",
+            null
+        )
             .then((data) => setDrives(data.drives))
             .catch((error) => console.log(error));
+
+        // setDrives([
+        //     ...drives,
+        //     { id: 66, name: "hi", is_owner: false },
+        //     { id: 66, name: "there", is_owner: false },
+        // ]);
     };
 
     const setModal = (content) => {
@@ -47,7 +57,12 @@ function DriveList(props) {
             <Layout>
                 <div className="driveList">
                     <div className="driveListAbove">
-                        <span className="driveListTitle" style={{cursor: "default"}}>드라이브 목록</span>
+                        <span
+                            className="driveListTitle"
+                            style={{ cursor: "default" }}
+                        >
+                            드라이브 목록
+                        </span>
                         <span
                             className="driveListAdd"
                             onClick={() => {

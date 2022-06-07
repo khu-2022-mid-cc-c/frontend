@@ -13,7 +13,7 @@ function SetBackground(props) {
                     },
                 }
             );
-            if (response.data.result) {
+            if (response.data.status) {
                 props.setBgName(props.selectedFiles[0].name);
                 props.reload();
                 props.next(

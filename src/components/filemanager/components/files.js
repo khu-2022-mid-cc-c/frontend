@@ -7,20 +7,31 @@ import imgUrl from "../../../assets/img/default_bg.jpg";
 // 파일 아이콘 클릭시 callback으로 넘어온 selectFile함수 호출
 
 function Files(props) {
-
     const selected = props.selectedFiles.reduce((acc, cur) => {
         acc[cur.name] = true;
         return acc;
     }, {});
 
     return (
-        <div className="files" style={ props.bgUrl !== "" ? {backgroundImage: `url(${props.bgUrl})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'} : null}>
+        <div
+            className="files"
+            style={
+                props.bgUrl !== ""
+                    ? {
+                          backgroundImage: `url(${props.bgUrl})`,
+                          backgroundRepeat: "no-repeat",
+                          backgroundSize: "cover",
+                      }
+                    : null
+            }
+        >
             <ul>
-                {props.fileList.map((v) => (
-                    <li key={v.name} onClick={() => props.selectFile(v)}>
-                        <FileIcons file={v} selected={selected[v.name]} />
-                    </li>
-                ))}
+                {props.fileList &&
+                    props.fileList.map((v) => (
+                        <li key={v.name} onClick={() => props.selectFile(v)}>
+                            <FileIcons file={v} selected={selected[v.name]} />
+                        </li>
+                    ))}
             </ul>
         </div>
     );

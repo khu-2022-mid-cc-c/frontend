@@ -73,6 +73,7 @@
     display: flex;
     align-items: center;
     transition: 0.1s ease-in;
+    cursor: pointer;
 }
 .sideBar > ul > li > div:hover {
     background-color: #e3e2e1;

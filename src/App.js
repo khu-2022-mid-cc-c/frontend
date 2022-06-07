@@ -27,8 +27,8 @@ function App() {
                 <Route path="/register" element={<PublicRoute />}>
                     <Route path="" element={<AuthForm type={"REGISTER"} />} />
                 </Route>
-                <Route path="/embed/*" element={<PublicRoute />}>
-                    <Route path="" element={<EmbedRenderer />} />
+                <Route path="/embed/*" element={<EmbedRenderer />}>
+                    {/* <Route path="" element={<EmbedRenderer />} /> */}
                 </Route>
                 <Route path="/" element={<PublicRoute />}>
                     <Route path="" element={<About />} />

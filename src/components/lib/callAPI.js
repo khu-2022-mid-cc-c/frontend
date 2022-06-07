@@ -13,8 +13,9 @@ function callAPI(method, url, data) {
 
         axios(config)
             .then(function (response) {
-                const data = JSON.stringify(response.data);
-                if (response.data.status) resolve(data);
+                // const data = JSON.stringify(response.data);
+                const data = response.data;
+                if (data.result || data.status) resolve(data);
                 else reject(data);
             })
             .catch(function (error) {

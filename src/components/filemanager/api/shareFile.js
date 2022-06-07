@@ -13,9 +13,8 @@ function ShareDrive(props) {
             data
         )
             .then((v) => {
-                props.reload();
                 props.next(
-                    "드라이브 공유 성공",
+                    "파일 공유 성공",
                     <>
                         사용자 <strong>{user}</strong>에게 파일{" "}
                         <strong>{props.selectedFiles[0].name}</strong>가
@@ -24,9 +23,8 @@ function ShareDrive(props) {
                 );
             })
             .catch(() => {
-                props.reload();
                 props.next(
-                    "드라이브 공유 실패",
+                    "파일 공유 실패",
                     <>
                         사용자 <strong>{user}</strong>에게 파일{" "}
                         <strong>{props.selectedFiles[0].name}</strong>를

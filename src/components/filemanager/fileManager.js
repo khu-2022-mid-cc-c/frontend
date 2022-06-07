@@ -46,25 +46,15 @@ function FileManager(props) {
     const [bgUrl, setBgUrl] = useState("");
 
     const loadFileList = () => {
-        callAPI("GET", url, null).then((res) => setFileList(res.list));
+        callAPI("GET", url, null).then((res) => {
+            setFileList(res.list);
+            setBgUrl(res.folder.backgroundImage);
+        });
         setSelectedFiles([]);
-    };
-
-    const getFileList = async () => {
-        try {
-            const response = await axios.get(URL, headers);
-            console.log(response.data);
-            if (response.data.status) {
-                setBgUrl(response.data.folder.backgroundImage);
-            }
-        } catch (err) {
-            console.log(err);
-        }
     };
 
     useEffect(() => {
         loadFileList();
-        getFileList();
     }, [bgName]);
 
     const [sort, setSort] = useState({ method: "파일 이름", ascend: true });
@@ -76,7 +66,7 @@ function FileManager(props) {
     const sortMethod = {
         "파일 이름": "name",
         "수정 날짜": "updated_at",
-        "파일 크기": "size",
+        "업로드 날짜": "created_at",
     };
 
     useEffect(() => {

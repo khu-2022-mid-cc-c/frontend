@@ -25,7 +25,7 @@ function FileIcons(props) {
                 <Icon />
             </IconContext.Provider>
             <div>
-                <span className="FileTitle">{props.title}</span>
+                <span className="FileTitle">{props.file.name}</span>
             </div>
         </div>
     );
