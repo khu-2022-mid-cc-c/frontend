@@ -3,7 +3,7 @@ const axios = require("axios");
 
 function callAPI(method, url, data) {
     return new Promise((resolve, reject) => {
-        const token = getCookies("csrftoken");
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY1NDUwMjEwNiwiZXhwIjoxNjU0NTg4NTA2fQ.sxGMEy-irCZ6_F9u9wL8-FeHDD5IdZHa-KweF6fQ8wA"
         const config = {
             method,
             url,
