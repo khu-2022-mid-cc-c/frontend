@@ -134,6 +134,9 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
+.fileInfos .fileInfo .fileInfoText{
+    line-height: 1.5;
+}
 @media (max-width: 1000px) {
     .fileInfo {
         display: none;
