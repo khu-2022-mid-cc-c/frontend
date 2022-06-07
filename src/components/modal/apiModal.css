@@ -24,7 +24,7 @@
 }
 
 .apiModalContents h2 {
-    border-left: #990e17 solid 2px;
+    border-left: #990e17 solid 1vh;
     padding-left: 10px;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .makeFolderModal button {
-    width: 40%;
+    width: 30%;
     font-size: 16pt;
     float: right;
     background-color: #990e17;

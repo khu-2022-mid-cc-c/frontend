@@ -47,7 +47,7 @@ function DriveList(props) {
             <Layout>
                 <div className="driveList">
                     <div className="driveListAbove">
-                        <span className="driveListTitle">드라이브 목록</span>
+                        <span className="driveListTitle" style={{cursor: "default"}}>드라이브 목록</span>
                         <span
                             className="driveListAdd"
                             onClick={() => {

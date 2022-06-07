@@ -53,7 +53,7 @@ function myModal(props) {
                 },
             }}
         >
-            <div className="modalClose" onClick={props.close}>
+            <div className="modalClose" onClick={props.close} style={{ marginTop: "3%", marginRight: "3%", cursor: "pointer" }}>
                 <IconContext.Provider
                     value={{ size: "20px", color: "#666666" }}
                 >

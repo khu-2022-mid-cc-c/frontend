@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 import Layout from "../layout/layout";
 import Controller from "./components/controller";
@@ -8,6 +9,7 @@ import Files from "./components/files";
 import Modal from "../modal/modal";
 import OkModal from "../modal/okModal";
 import callAPI from "../lib/callAPI";
+import { getCookies, isCookies } from "../Util";
 
 import downloadFiles from "./api/downloadFile";
 import ShareDrive from "./api/shareDrive";
@@ -35,16 +37,35 @@ function FileManager(props) {
     //     // const fileList = fetch("url")
     const { driveId } = useParams();
     const url = `https://linkhu.which.menu/api/drive/file/${driveId}`;
+    const headers = {
+        headers: { Authorization: "Bearer " + getCookies("token") },
+    };
 
     const [fileList, setFileList] = useState([]);
+    const [bgName, setBgName] = useState("");
+    const [bgUrl, setBgUrl] = useState("");
 
     const loadFileList = () => {
         callAPI("GET", url, null).then((res) => setFileList(res.list));
         setSelectedFiles([]);
     };
+
+    const getFileList = async () => {
+        try {
+            const response = await axios.get(URL, headers);
+            console.log(response.data);
+            if (response.data.status) {
+                setBgUrl(response.data.folder.backgroundImage);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     useEffect(() => {
         loadFileList();
-    }, []);
+        getFileList();
+    }, [bgName]);
 
     const [sort, setSort] = useState({ method: "파일 이름", ascend: true });
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -123,6 +144,7 @@ function FileManager(props) {
                         driveId={driveId}
                         fileList={fileList}
                         selectedFiles={selectedFiles}
+                        setBgName={setBgName}
                         close={() => {
                             setShowModal(false);
                         }}
@@ -149,6 +171,7 @@ function FileManager(props) {
                     fileList={fileList}
                     selectedFiles={selectedFiles}
                     selectFile={selectFile}
+                    bgUrl={bgUrl}
                 />
             </div>
             <Modal

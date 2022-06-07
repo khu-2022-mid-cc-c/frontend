@@ -45,7 +45,7 @@ function ShareDrive(props) {
                 }}
             />
             <div className="modalBtnZone">
-                <button onClick={share}>공유</button>
+                <button onClick={share} style={{borderRadius: "3px"}}>공유</button>
             </div>
         </div>
     );

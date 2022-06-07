@@ -9,3 +9,8 @@ export const setCookies = (key, value) => {
 export const getCookies = (key) => {
     return cookies.get(key);
 }
+
+export const isCookies = (key) => {
+    if(getCookies(key) !== undefined) return true;
+    else return false;
+}

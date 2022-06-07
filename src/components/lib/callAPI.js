@@ -3,7 +3,7 @@ const axios = require("axios");
 
 function callAPI(method, url, data) {
     return new Promise((resolve, reject) => {
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY1NDUwMjEwNiwiZXhwIjoxNjU0NTg4NTA2fQ.sxGMEy-irCZ6_F9u9wL8-FeHDD5IdZHa-KweF6fQ8wA"
+        const token = getCookies("token");
         const config = {
             method,
             url,
@@ -13,8 +13,8 @@ function callAPI(method, url, data) {
 
         axios(config)
             .then(function (response) {
-                const data = response.data;
-                if (data.result || data.status) resolve(data);
+                const data = JSON.stringify(response.data);
+                if (response.data.status) resolve(data);
                 else reject(data);
             })
             .catch(function (error) {

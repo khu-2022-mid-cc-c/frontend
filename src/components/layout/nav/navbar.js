@@ -1,5 +1,7 @@
 import { IconContext } from "react-icons";
+import { IoMdLogOut } from "react-icons/io";
 import { MdMenu, MdLogin, MdInfoOutline } from "react-icons/md";
+import isAdmin from "../../route/admin";
 
 function Menubtn(props) {
     return (
@@ -25,8 +27,8 @@ function Menubtn(props) {
 
 function RightGroup() {
     const icons = [
-        { title: "info", icon: MdInfoOutline, href: "/about" },
-        { title: "login", icon: MdLogin, href: "/login" },
+        { title: "info", icon: MdInfoOutline, href: "/" },
+        { title: "logout", icon: IoMdLogOut, href: "/login" },
     ];
 
     return (
@@ -53,7 +55,7 @@ function Navbar(props) {
         <div className="navTop">
             <div className="navLeftIconsGroup">
                 <Menubtn onClick={props.toggleSidebar} />
-                <a href="/">
+                <a href={!isAdmin() || window.location.pathname === "/login" ? "/" : "/drives"}>
                     <img
                         src={`${process.env.PUBLIC_URL}/logo.png`}
                         alt="logo"

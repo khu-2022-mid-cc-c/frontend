@@ -134,7 +134,7 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
 }
-.fileInfos .fileInfo .fileInfoText{
+.fileInfos .fileInfo .fileInfoText {
     line-height: 1.5;
 }
 @media (max-width: 1000px) {
@@ -155,11 +155,13 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-top: 2%;
 }
 
 .files li {
     text-align: center;
     margin-bottom: 16px;
+    margin-right: 1%;
 }
 
 .FileIcon {
@@ -168,12 +170,17 @@
     align-items: center;
     justify-content: space-evenly;
 
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid #f1f2f3;
     padding: 12px;
     margin: 5px;
+    opacity: 0.6;
+    background: white;
+
+    cursor: pointer;
+
+    width: 4vw;
+    height: 8vh;
 }
 
 .FileIcon.selected {
@@ -184,11 +191,23 @@
     margin-top: 4px;
     text-align: center;
     display: block;
-    font-size: 12px;
+    font-size: 1.5vh;
     font-weight: normal;
     color: rgba(0, 0, 0, 0.4);
     word-break: break-all;
 }
+
+.FileIcon div {
+    width: 100%;
+    height: 50%;
+    word-wrap: break-word;
+    margin-top: 7px;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    word-break: keep-all;
+    -webkit-line-clamp: 1;
+}
+
 .FileIcon:hover {
     background-color: #f1f2f3;
 }

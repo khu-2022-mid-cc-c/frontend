@@ -21,10 +21,12 @@ function FileIcons(props) {
 
     return (
         <div className={`FileIcon ${props.selected ? "selected" : ""}`}>
-            <IconContext.Provider value={{ size: "50px", color: "#666666" }}>
+            <IconContext.Provider value={{ size: "30px", color: "#666666" }}>
                 <Icon />
             </IconContext.Provider>
-            <span className="FileTitle">{props.file.name}</span>
+            <div>
+                <span className="FileTitle">{props.title}</span>
+            </div>
         </div>
     );
 }

@@ -3,10 +3,11 @@ import axios from "axios";
 import { IoMdSettings } from "react-icons/io";
 
 import { setCookies, getCookies } from "../Util";
+import imageUrl from "../../assets/img/default_bg.jpg";
 
 export default function BackImg()
 {
-    const [bgImgUrl, setBgImgUrl] = useState("");
+    const [bgImgUrl, setBgImgUrl] = useState(imageUrl);
     const [formData, setFormData] = useState();
 
     //...배경 이미지 관련
@@ -49,7 +50,7 @@ export default function BackImg()
     return(
         <div className="background-container" style={{backgroundImage: `url(${bgImgUrl})`}}>
             <input type="file" id="bgImg" style={{ display: 'none' }} onChange={bgImgChangeHandler} />
-            <label htmlFor="bgImg"><IoMdSettings className="icon"/></label>
+            <label htmlFor="bgImg"><IoMdSettings className="icon" style={{color: "white", cursor: "pointer"}}/></label>
         </div>
     );
 }
